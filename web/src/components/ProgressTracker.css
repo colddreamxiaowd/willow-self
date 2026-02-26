@@ -1,0 +1,451 @@
+/* ProgressTracker.css - 进度追踪和正面反馈样式 */
+/* 设计理念：温暖、鼓励、有成就感 */
+
+/* ========================================
+   进度追踪器
+   ======================================== */
+.progress-tracker {
+  padding: 1rem 0;
+}
+
+.tracker-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.tracker-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tracker-step:hover {
+  transform: scale(1.05);
+}
+
+.step-indicator {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--warm-bg, #1a1a2e);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.tracker-step.completed .step-indicator {
+  background: var(--warm-success, #86efac);
+  border-color: var(--warm-success, #86efac);
+  color: var(--warm-bg, #1a1a2e);
+}
+
+.tracker-step.current .step-indicator {
+  border-color: var(--warm-primary, #7dd3fc);
+  color: var(--warm-primary, #7dd3fc);
+  box-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 80px;
+  text-align: center;
+}
+
+.tracker-step.completed .step-label,
+.tracker-step.current .step-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 紧凑模式 */
+.progress-tracker.compact .step-indicator {
+  width: 28px;
+  height: 28px;
+}
+
+.progress-tracker.compact .step-label {
+  display: none;
+}
+
+/* ========================================
+   里程碑列表
+   ======================================== */
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.milestone-item.completed {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: rgba(0, 255, 136, 0.2);
+}
+
+.milestone-emoji {
+  font-size: 1.25rem;
+}
+
+.milestone-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.milestone-item.completed .milestone-name {
+  color: var(--warm-success, #86efac);
+}
+
+.milestone-check {
+  color: var(--warm-success, #86efac);
+}
+
+/* ========================================
+   庆祝覆盖层
+   ======================================== */
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 3000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.celebration-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, 
+    var(--warm-primary, #7dd3fc), 
+    var(--warm-accent, #a78bfa));
+  border-radius: 50%;
+  animation: particleFall 2s ease-out forwards;
+}
+
+@keyframes particleFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.celebration-content {
+  text-align: center;
+  animation: celebrationPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes celebrationPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-emoji {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: celebrationBounce 1s ease infinite;
+}
+
+@keyframes celebrationBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.celebration-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--warm-success, #86efac);
+  margin: 0 0 0.5rem;
+}
+
+.celebration-message {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* ========================================
+   进度条
+   ======================================== */
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progress-bar-container.small {
+  gap: 0.5rem;
+}
+
+.progress-bar-container.small .progress-bar-track {
+  height: 4px;
+}
+
+.progress-bar-container.large {
+  gap: 1rem;
+}
+
+.progress-bar-container.large .progress-bar-track {
+  height: 10px;
+}
+
+.progress-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-track.primary .progress-bar-fill {
+  background: linear-gradient(90deg, 
+    var(--warm-primary, #7dd3fc), 
+    var(--warm-accent, #a78bfa));
+}
+
+.progress-bar-track.success .progress-bar-fill {
+  background: linear-gradient(90deg, 
+    var(--warm-success, #86efac), 
+    var(--warm-primary, #7dd3fc));
+}
+
+.progress-bar-track.warning .progress-bar-fill {
+  background: linear-gradient(90deg, 
+    var(--warm-warning, #fcd34d), 
+    var(--warm-secondary, #fbbf24));
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-percentage {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--warm-text-muted, #a0a0b0);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ========================================
+   鼓励横幅
+   ======================================== */
+.encouragement-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, 
+    rgba(134, 239, 172, 0.1), 
+    rgba(125, 211, 252, 0.1));
+  border: 1px solid rgba(134, 239, 172, 0.2);
+  border-radius: 10px;
+  animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.encouragement-emoji {
+  font-size: 1.25rem;
+}
+
+.encouragement-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--warm-text, #f0f0f5);
+}
+
+.encouragement-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.encouragement-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   成就徽章
+   ======================================== */
+.achievement-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.achievement-badge.earned {
+  background: linear-gradient(135deg, 
+    rgba(125, 211, 252, 0.1), 
+    rgba(167, 139, 250, 0.1));
+  border-color: rgba(125, 211, 252, 0.3);
+  color: var(--warm-primary, #7dd3fc);
+}
+
+.badge-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ========================================
+   步骤计数器
+   ======================================== */
+.step-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.counter-current {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--warm-primary, #7dd3fc);
+}
+
+.counter-separator {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.counter-total {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.counter-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 0.35rem;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 600px) {
+  .tracker-line::before {
+    display: none;
+  }
+  
+  .tracker-step {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .step-label {
+    max-width: none;
+    text-align: left;
+  }
+  
+  .celebration-emoji {
+    font-size: 4rem;
+  }
+  
+  .celebration-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .celebration-content,
+  .celebration-emoji,
+  .encouragement-banner {
+    animation: none;
+  }
+  
+  .tracker-step,
+  .step-indicator,
+  .progress-bar-fill {
+    transition: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 19:50
+   编辑人: Trae AI
+   ======================================== */

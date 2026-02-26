@@ -1,0 +1,81 @@
+policies:
+  - name: "早起"
+    description: "每天早上6点起床"
+    impact:
+      health: 0.3
+      productivity: 0.2
+    cost: 1.0
+
+  - name: "运动"
+    description: "每周运动3次，每次30分钟"
+    impact:
+      health: 0.5
+      happiness: 0.2
+      energy: 0.3
+    cost: 2.0
+
+  - name: "健康饮食"
+    description: "均衡营养，多吃蔬菜水果"
+    impact:
+      health: 0.4
+      energy: 0.3
+    cost: 1.5
+    dependencies:
+      - "早起"
+
+  - name: "阅读"
+    description: "每天阅读30分钟"
+    impact:
+      growth: 0.4
+      focus: 0.2
+    cost: 0.5
+    conflicts:
+      - "刷手机"
+
+  - name: "记账"
+    description: "记录每一笔开支"
+    impact:
+      finance: 0.3
+      awareness: 0.4
+    cost: 0.5
+
+  - name: "储蓄"
+    description: "每月储蓄收入的20%"
+    impact:
+      finance: 0.5
+      security: 0.3
+    cost: 1.0
+    dependencies:
+      - "记账"
+
+  - name: "社交"
+    description: "每周与朋友见面一次"
+    impact:
+      relationships: 0.5
+      happiness: 0.3
+    cost: 1.5
+
+  - name: "冥想"
+    description: "每天冥想10分钟"
+    impact:
+      happiness: 0.3
+      focus: 0.4
+      stress: -0.5
+    cost: 0.5
+
+initial_state:
+  health: 5.0
+  happiness: 5.0
+  finance: 5.0
+  relationships: 5.0
+  growth: 5.0
+
+target_state:
+  health: 8.0
+  happiness: 7.5
+  finance: 7.0
+  relationships: 7.0
+  growth: 7.0
+
+# 最后更新时间: 2026-02-21 15:05
+# 编辑人: Trae AI

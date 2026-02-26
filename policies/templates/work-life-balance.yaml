@@ -1,0 +1,150 @@
+# 工作生活平衡模板
+# 适用于：工作忙碌、缺乏生活、想要平衡工作与生活的人
+
+policies:
+  # ===== 时间边界 =====
+  - name: "下班断联"
+    description: "下班后不处理工作消息"
+    impact:
+      happiness: 0.4
+      stress: -0.3
+      relationships: 0.2
+    cost: 1.5
+
+  - name: "周末休息"
+    description: "周末至少一天完全不工作"
+    impact:
+      happiness: 0.4
+      stress: -0.4
+      energy: 0.3
+    cost: 1.0
+
+  - name: "准时下班"
+    description: "每天准时下班，不加班"
+    impact:
+      happiness: 0.3
+      stress: -0.2
+      relationships: 0.2
+    cost: 1.5
+
+  # ===== 家庭时间 =====
+  - name: "家庭晚餐"
+    description: "每天与家人共进晚餐"
+    impact:
+      happiness: 0.4
+      relationships: 0.4
+    cost: 1.0
+
+  - name: "家庭活动"
+    description: "每周安排一次家庭活动"
+    impact:
+      happiness: 0.4
+      relationships: 0.5
+    cost: 1.5
+
+  - name: "陪伴孩子"
+    description: "每天花1小时高质量陪伴孩子"
+    impact:
+      happiness: 0.4
+      relationships: 0.5
+    cost: 1.0
+
+  # ===== 个人时间 =====
+  - name: "独处时间"
+    description: "每天留出30分钟独处时间"
+    impact:
+      happiness: 0.3
+      awareness: 0.3
+      stress: -0.2
+    cost: 0.5
+
+  - name: "爱好时间"
+    description: "每周花3小时发展个人爱好"
+    impact:
+      happiness: 0.5
+      growth: 0.2
+    cost: 1.5
+
+  - name: "运动时间"
+    description: "每周运动3次，每次30分钟"
+    impact:
+      health: 0.4
+      energy: 0.4
+      stress: -0.3
+    cost: 2.0
+
+  # ===== 社交生活 =====
+  - name: "朋友聚会"
+    description: "每月与朋友聚会一次"
+    impact:
+      happiness: 0.3
+      relationships: 0.3
+    cost: 1.0
+
+  - name: "社交活动"
+    description: "每月参加一次社交活动"
+    impact:
+      happiness: 0.3
+      relationships: 0.3
+      growth: 0.2
+    cost: 1.5
+
+  # ===== 工作效率 =====
+  - name: "高效工作"
+    description: "工作时间专注，提高效率"
+    impact:
+      productivity: 0.5
+      stress: -0.2
+    cost: 1.0
+
+  - name: "任务优先级"
+    description: "每天确定最重要的3件事"
+    impact:
+      productivity: 0.4
+      stress: -0.2
+    cost: 0.5
+
+  - name: "学会拒绝"
+    description: "对不重要的请求学会说"不""
+    impact:
+      stress: -0.3
+      productivity: 0.2
+    cost: 1.0
+
+  # ===== 防御型国策 =====
+  - name: "戒加班"
+    description: "减少不必要的加班"
+    impact:
+      happiness: 0.3
+      stress: -0.3
+      health: 0.2
+    cost: 2.0
+
+  - name: "戒手机"
+    description: "减少无意义的手机使用时间"
+    impact:
+      happiness: 0.2
+      relationships: 0.2
+      focus: 0.3
+    cost: 1.0
+
+# 初始状态
+initial_state:
+  happiness: 4.0      # 幸福感低
+  relationships: 4.0  # 人际关系差
+  stress: 7.0         # 压力大
+  health: 5.0         # 健康一般
+  energy: 4.0         # 精力不足
+  productivity: 6.0   # 生产力尚可
+
+# 目标状态
+target_state:
+  happiness: 8.0      # 幸福感提升
+  relationships: 8.0  # 人际关系改善
+  stress: 4.0         # 压力降低
+  health: 7.0         # 健康改善
+  energy: 7.0         # 精力恢复
+  productivity: 7.0   # 保持高效
+
+# 最后更新时间: 2026-02-21 20:00
+# 编辑人: Trae AI

@@ -1,0 +1,97 @@
+/* web/src/components/SacredSeatPrompt/SacredSeatPrompt.css */
+
+.sacred-seat-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.sacred-seat-prompt {
+  background: var(--paper-bg, #f5f0e6);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.prompt-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sacred-seat-prompt h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  color: var(--ink-primary, #2c1810);
+}
+
+.prompt-content {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.prompt-content p {
+  margin: 0.5rem 0;
+  color: var(--ink-primary, #2c1810);
+}
+
+.prompt-stats {
+  padding: 0.75rem;
+  background: rgba(74, 124, 89, 0.1);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.prompt-explanation {
+  font-size: 0.85rem;
+  color: var(--ink-faded, #8b7355);
+  font-style: italic;
+}
+
+.prompt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prompt-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prompt-btn.primary {
+  background: var(--accent-color, #4a7c59);
+  color: white;
+}
+
+.prompt-btn.primary:hover {
+  opacity: 0.9;
+}
+
+.prompt-btn:not(.primary):not(.link) {
+  background: rgba(139, 115, 85, 0.1);
+  color: var(--ink-primary, #2c1810);
+}
+
+.prompt-btn.link {
+  background: transparent;
+  color: var(--ink-faded, #8b7355);
+  font-size: 0.9rem;
+}
+
+/* 最后更新时间: 2026-02-23 11:00 */
+/* 编辑人: Trae AI */

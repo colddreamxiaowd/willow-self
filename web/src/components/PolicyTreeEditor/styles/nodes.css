@@ -1,0 +1,985 @@
+/* 节点状态颜色变量 - 双色背景切换 */
+:root {
+  --node-active-bg: rgb(41, 178, 74);
+  --node-active-border: rgb(34, 139, 34);
+  --node-active-shadow: rgba(41, 178, 74, 0.4);
+  --node-inactive-bg: rgb(67, 67, 67);
+  --node-inactive-border: rgb(50, 50, 50);
+  --node-extinguished-bg: rgb(100, 67, 67);
+  --node-extinguished-border: rgb(139, 67, 67);
+  --node-text-primary: rgb(242, 242, 247);
+  --node-text-secondary: rgba(242, 242, 247, 0.9);
+  --node-bg-color: #f5f5f0;
+}
+
+/* 国策节点基础样式 - 游戏技能树风格 */
+.policy-node {
+  min-width: 200px;
+  max-width: 240px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 2px solid;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  position: relative;
+  /* 字体渲染优化 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* GPU 加速优化 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* 防止拖动时选中文本 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* 触摸设备支持 */
+  touch-action: none;
+}
+
+/* 点亮状态 - 绿色背景 + 发光效果 */
+.policy-node.active {
+  background: linear-gradient(135deg, var(--node-active-bg), rgb(50, 160, 80));
+  border-color: var(--node-active-border);
+  box-shadow: 
+    0 4px 15px var(--node-active-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: nodeActivate 0.3s ease-out;
+}
+
+/* 未点亮状态 - 灰色背景 */
+.policy-node.inactive {
+  background: linear-gradient(135deg, var(--node-inactive-bg), rgb(80, 80, 80));
+  border-color: var(--node-inactive-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: nodeDeactivate 0.3s ease-out;
+}
+
+/* 节点激活动画 - 只用 box-shadow */
+@keyframes nodeActivate {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 8px 25px var(--node-active-shadow),
+      0 0 20px rgba(41, 178, 74, 0.6);
+  }
+  100% {
+    box-shadow: 
+      0 4px 15px var(--node-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* 节点停用动画 - 只用 box-shadow */
+@keyframes nodeDeactivate {
+  0% {
+    box-shadow: 
+      0 4px 15px var(--node-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* 已熄灭状态 - 暗红灰背景 */
+.policy-node.extinguished {
+  background: linear-gradient(135deg, var(--node-extinguished-bg), rgb(120, 80, 80));
+  border-color: var(--node-extinguished-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.85;
+}
+
+/* 悬停效果 - 只在非拖动状态下生效 */
+.policy-node:hover:not(.dragging) {
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    0 4px 12px var(--node-active-shadow);
+  z-index: 10;
+}
+
+/* 拖动状态 */
+.policy-node.dragging {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    0 6px 18px rgba(41, 178, 74, 0.3);
+  z-index: 100;
+  opacity: 0.95;
+}
+
+/* 编辑中状态 */
+.policy-node.editing {
+  border-color: rgb(255, 204, 0);
+  box-shadow: 
+    0 0 0 3px rgba(255, 204, 0, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+/* 节点头部 - 等级和图标 */
+.node-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.node-tier {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  color: var(--node-text-primary);
+  letter-spacing: 0.5px;
+}
+
+/* 国策名称 - 大字体加粗 */
+.node-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 4px 0;
+  text-align: center;
+  color: var(--node-text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: 1.3;
+}
+
+/* 分隔线 */
+.node-divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(242, 242, 247, 0.4), 
+    transparent
+  );
+  margin: 6px 0;
+}
+
+/* 国策描述 - 小字体 */
+.node-description {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  text-align: center;
+  margin: 4px 0;
+  color: var(--node-text-secondary);
+}
+
+/* 强化效果区域 */
+.node-enhancement-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.node-enhancement-badge {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: rgb(255, 215, 0);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1px 6px;
+  border-radius: 8px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.node-enhancement-effect {
+  font-size: 0.7rem;
+  color: var(--node-text-secondary);
+  flex: 1;
+  text-align: left;
+}
+
+/* 编辑表单样式 */
+.node-edit-form {
+  background: transparent;
+}
+
+.node-edit-form .form-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(242, 242, 247, 0.3);
+  color: var(--node-text-primary);
+}
+
+.node-edit-form .form-field {
+  margin-bottom: 8px;
+}
+
+.node-edit-form label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--node-text-secondary);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.node-edit-form input,
+.node-edit-form textarea,
+.node-edit-form select {
+  width: 100%;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(242, 242, 247, 0.25);
+  border-radius: 4px;
+  color: var(--node-text-primary);
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.node-edit-form input:focus,
+.node-edit-form textarea:focus,
+.node-edit-form select:focus {
+  outline: none;
+  border-color: rgba(255, 215, 0, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.node-edit-form textarea {
+  resize: vertical;
+  min-height: 40px;
+}
+
+.node-edit-form .form-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.node-edit-form button {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.node-edit-form .btn-save {
+  background: linear-gradient(135deg, rgb(41, 178, 74), rgb(34, 139, 34));
+  color: var(--node-text-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.node-edit-form .btn-save:hover {
+  background: linear-gradient(135deg, rgb(50, 190, 80), rgb(40, 150, 40));
+  transform: translateY(-1px);
+}
+
+.node-edit-form .btn-cancel {
+  background: rgba(242, 242, 247, 0.15);
+  color: var(--node-text-primary);
+  border: 1px solid rgba(242, 242, 247, 0.25);
+}
+
+.node-edit-form .btn-cancel:hover {
+  background: rgba(242, 242, 247, 0.25);
+}
+
+/* 强化效果编辑器样式 */
+.enhancement-editor {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(242, 242, 247, 0.2);
+}
+
+.enhancement-mode-selector {
+  margin-bottom: 10px;
+}
+
+.enhancement-mode-selector label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--node-text-secondary);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.enhancement-mode-selector select {
+  width: 100%;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(242, 242, 247, 0.25);
+  border-radius: 4px;
+  color: var(--node-text-primary);
+  font-size: 0.8rem;
+}
+
+.auto-config-section,
+.custom-effects-section {
+  margin-bottom: 10px;
+}
+
+.auto-config-section h4,
+.custom-effects-section h4 {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--node-text-primary);
+  font-weight: 600;
+}
+
+.enhancement-preview {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* 锁定状态 - 父节点未点亮时 */
+.policy-node.locked {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* 点亮动画 */
+@keyframes lightUp {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(41, 178, 74, 0);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(41, 178, 74, 0.6);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(41, 178, 74, 0.3);
+  }
+}
+
+.policy-node.active {
+  animation: lightUp 0.3s ease-out;
+}
+
+/* 抖动提示（父节点未点亮时） */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.policy-node.locked:active {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* 编辑区域样式 - 新设计 */
+.edit-area {
+  padding: 8px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  box-sizing: border-box;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: rgb(255, 204, 0);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.edit-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 12px;
+  resize: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  box-sizing: border-box;
+}
+
+.edit-textarea:focus {
+  outline: none;
+  border-color: rgb(255, 204, 0);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.save-btn, .cancel-btn {
+  flex: 1;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, rgb(41, 178, 74), rgb(34, 139, 34));
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, rgb(50, 190, 80), rgb(40, 150, 40));
+  transform: translateY(-1px);
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.enhancement-preview h5 {
+  font-size: 0.75rem;
+  margin-bottom: 3px;
+  color: var(--node-text-secondary);
+}
+
+.preview-item {
+  display: flex;
+  gap: 6px;
+  font-size: 0.75rem;
+  margin: 2px 0;
+}
+
+.preview-level {
+  color: rgb(255, 215, 0);
+  font-weight: 700;
+  min-width: 22px;
+}
+
+.preview-desc {
+  color: var(--node-text-secondary);
+}
+
+.custom-effect-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.effect-level-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgb(255, 215, 0);
+  min-width: 26px;
+}
+
+.custom-effect-row input {
+  flex: 1;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(242, 242, 247, 0.25);
+  border-radius: 4px;
+  color: var(--node-text-primary);
+  font-size: 0.75rem;
+}
+
+.btn-add-level {
+  width: 100%;
+  padding: 5px;
+  background: rgba(41, 178, 74, 0.2);
+  border: 1px dashed rgba(41, 178, 74, 0.6);
+  border-radius: 4px;
+  color: var(--node-text-primary);
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-add-level:hover {
+  background: rgba(41, 178, 74, 0.35);
+  border-style: solid;
+}
+
+.btn-save-enhancement {
+  width: 100%;
+  padding: 6px;
+  background: linear-gradient(135deg, rgb(41, 178, 74), rgb(34, 139, 34));
+  border: none;
+  border-radius: 4px;
+  color: var(--node-text-primary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-save-enhancement:hover {
+  background: linear-gradient(135deg, rgb(50, 190, 80), rgb(40, 150, 40));
+  transform: translateY(-1px);
+}
+
+/* React Flow 连接线样式 */
+.react-flow__edge-path {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.react-flow__edge.active .react-flow__edge-path {
+  stroke: rgb(41, 178, 74);
+  stroke-width: 3;
+  filter: drop-shadow(0 1px 2px rgba(41, 178, 74, 0.4));
+}
+
+.react-flow__edge.inactive .react-flow__edge-path {
+  stroke: rgb(150, 150, 150);
+  stroke-dasharray: 5, 5;
+}
+
+.react-flow__edge.extinguished .react-flow__edge-path {
+  stroke: rgb(139, 100, 100);
+  stroke-width: 2;
+}
+
+/* React Flow 控件样式 */
+.react-flow__controls {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.react-flow__controls-button {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.react-flow__controls-button:hover {
+  background: rgba(41, 178, 74, 0.1);
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+
+/* 性能优化样式 */
+
+/* 拖拽时的优化 */
+.policy-node.dragging {
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* 使用 transform 替代 top/left */
+.react-flow__node {
+  transform: translate3d(var(--x), var(--y), 0);
+  /* 字体渲染优化 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 减少重绘 */
+.react-flow__pane {
+  transform: translate3d(0, 0, 0);
+}
+
+/* React Flow 容器优化 */
+.react-flow__viewport {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 最后更新时间: 2026-02-22 23:50
+   编辑人: Trae AI
+   版本: v1.2 - 添加效果方向选择器样式 */
+
+/* 效果方向选择器样式 */
+.edit-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
+}
+
+.edit-label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.edit-label-small {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 60px;
+}
+
+.effect-direction-section {
+  margin-bottom: 10px;
+}
+
+.direction-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.direction-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.direction-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.direction-btn.active {
+  background: rgba(41, 178, 74, 0.4);
+  border-color: rgb(41, 178, 74);
+  box-shadow: 0 0 8px rgba(41, 178, 74, 0.4);
+}
+
+.auto-config-section {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.config-row:last-child {
+  margin-bottom: 0;
+}
+
+.edit-input-small {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  box-sizing: border-box;
+}
+
+.edit-input-small:focus {
+  outline: none;
+  border-color: rgb(255, 204, 0);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.custom-effects-section {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.custom-effect-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.custom-effect-row:last-child {
+  margin-bottom: 0;
+}
+
+.level-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgb(255, 215, 0);
+  min-width: 30px;
+}
+
+.effect-preview {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.preview-list {
+  margin-top: 4px;
+}
+
+.effect-preview-item {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 2px 0;
+}
+
+/* 稳态指示器样式 */
+.steady-state-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+}
+
+.steady-state-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.steady-state-dot:hover {
+  transform: scale(1.3);
+}
+
+/* 稳态工具提示样式 */
+.steady-state-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  min-width: 180px;
+  max-width: 220px;
+  background: rgba(30, 30, 35, 0.98);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: all 0.2s ease;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.steady-state-indicator:hover .steady-state-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltip-header {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-state-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-content {
+  padding: 8px 10px;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+
+.tooltip-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tooltip-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tooltip-message {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.4;
+}
+
+/* ========================================
+   今日打卡状态指示器
+   ======================================== */
+
+.checkin-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.checkin-completed {
+  background: linear-gradient(135deg, #29b24a, #228b22);
+}
+
+.checkin-partial {
+  background: linear-gradient(135deg, #f0a500, #d49000);
+}
+
+.checkin-failed {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+/* 节点编辑按钮 */
+.node-edit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: var(--node-text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.node-edit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--node-text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 链类型徽章 */
+.chain-type-badge {
+  font-size: 0.7rem;
+  margin-left: 6px;
+}
+
+.chain-type-badge.elite {
+  color: #ffd700;
+}
+
+.chain-type-badge.normal {
+  color: #4ecdc4;
+}
+
+/* 链类型选择区域 */
+.chain-type-section {
+  margin-bottom: 12px;
+}
+
+.chain-type-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.chain-type-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chain-type-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chain-type-btn.active {
+  border-color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.15);
+}
+
+.chain-type-btn.active.elite-btn {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.chain-icon {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.chain-label {
+  font-size: 0.75rem;
+  color: var(--node-text-primary);
+}
+
+.chain-type-hint {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: var(--node-text-secondary);
+  text-align: center;
+}
+
+/* 最后更新时间: 2026-02-26 15:30
+   编辑人: Trae AI
+   版本: v2.0 - 优化节点拖动性能，移除 transform 动画干扰 */

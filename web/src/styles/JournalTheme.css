@@ -1,0 +1,937 @@
+/* JournalTheme.css - 手账/私人笔记本风格 */
+/* 设计理念：像翻阅朋友的私人笔记，每一页都是思想实验 */
+/* 参考：ThanksAndFrom.md - "慢慢读，别着急" */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600&display=swap');
+
+/* ========================================
+   手账主题变量
+   ======================================== */
+:root {
+  --journal-paper: #FDF8F3;
+  --journal-paper-dark: #F5EDE4;
+  --journal-lined: #E8DDD0;
+  --journal-margin: #D4C4B0;
+  
+  --ink-primary: #2C1810;
+  --ink-secondary: #4A3728;
+  --ink-light: #6B5344;
+  --ink-faded: #8B7355;
+  
+  --pencil-gray: #5C5C5C;
+  --pencil-light: #8C8C8C;
+  
+  --highlight-yellow: rgba(255, 230, 109, 0.4);
+  --highlight-pink: rgba(255, 182, 193, 0.35);
+  --highlight-blue: rgba(173, 216, 230, 0.35);
+  --highlight-green: rgba(180, 236, 180, 0.35);
+  
+  --sticky-yellow: #FFF7A1;
+  --sticky-pink: #FFD1DC;
+  --sticky-blue: #B5E8F7;
+  --sticky-green: #C8F7C5;
+  
+  --washi-pink: #F8E1E7;
+  --washi-blue: #E1E8F8;
+  --washi-green: #E1F8E8;
+  
+  --coffee-stain: rgba(139, 90, 43, 0.08);
+  --shadow-soft: 2px 4px 12px rgba(44, 24, 16, 0.1);
+  --shadow-deep: 4px 8px 24px rgba(44, 24, 16, 0.15);
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  --font-hand: 'Caveat', 'Ma Shan Zheng', cursive;
+  --font-body: 'Noto Serif SC', 'Merriweather', Georgia, serif;
+  --font-mono: 'Courier New', monospace;
+}
+
+/* ========================================
+   手账主容器 - 纸张效果
+   ======================================== */
+.journal-theme {
+  background: var(--journal-paper);
+  min-height: 100vh;
+  color: var(--ink-primary);
+  font-family: var(--font-body);
+  line-height: 1.8;
+  position: relative;
+}
+
+.journal-theme::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      var(--journal-lined) 31px,
+      var(--journal-lined) 32px
+    );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.journal-theme::after {
+  content: '';
+  position: fixed;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--journal-margin);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ========================================
+   页面容器 - 笔记本页面
+   ======================================== */
+.journal-page {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 4rem 4rem 5rem;
+  background: var(--journal-paper);
+  min-height: 100vh;
+  z-index: 1;
+}
+
+.journal-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.03),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ========================================
+   咖啡渍装饰
+   ======================================== */
+.coffee-stain {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 30% 30%,
+    transparent 40%,
+    var(--coffee-stain) 50%,
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.coffee-stain-1 {
+  top: 60px;
+  right: 100px;
+  transform: rotate(15deg);
+}
+
+.coffee-stain-2 {
+  bottom: 200px;
+  left: 50px;
+  width: 80px;
+  height: 80px;
+  transform: rotate(-20deg);
+}
+
+/* ========================================
+   标题 - 手写风格
+   ======================================== */
+.journal-title {
+  font-family: var(--font-hand);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  position: relative;
+}
+
+.journal-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: var(--ink-primary);
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+.journal-subtitle {
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  color: var(--ink-light);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.journal-section-title {
+  font-family: var(--font-hand);
+  font-size: 1.8rem;
+  color: var(--ink-secondary);
+  margin: 2rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.journal-section-title::before {
+  content: '§';
+  font-size: 1.5rem;
+  color: var(--ink-faded);
+}
+
+/* ========================================
+   段落 - 书写感
+   ======================================== */
+.journal-paragraph {
+  font-size: 1.05rem;
+  color: var(--ink-secondary);
+  margin-bottom: 1.5rem;
+  text-indent: 2em;
+  position: relative;
+}
+
+.journal-paragraph:first-of-type::first-letter {
+  font-size: 3rem;
+  float: left;
+  line-height: 1;
+  margin-right: 0.5rem;
+  color: var(--ink-primary);
+  font-family: var(--font-hand);
+}
+
+/* ========================================
+   高亮标记
+   ======================================== */
+.highlight {
+  background: var(--highlight-yellow);
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+.highlight-pink {
+  background: var(--highlight-pink);
+}
+
+.highlight-blue {
+  background: var(--highlight-blue);
+}
+
+.highlight-green {
+  background: var(--highlight-green);
+}
+
+/* ========================================
+   便签纸效果
+   ======================================== */
+.sticky-note {
+  position: relative;
+  background: var(--sticky-yellow);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 
+    3px 3px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -20px 20px -20px rgba(0, 0, 0, 0.05);
+  transform: rotate(-1deg);
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 40px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-50%) rotate(-2deg);
+}
+
+.sticky-note-pink {
+  background: var(--sticky-pink);
+  transform: rotate(1deg);
+}
+
+.sticky-note-blue {
+  background: var(--sticky-blue);
+  transform: rotate(-0.5deg);
+}
+
+.sticky-note-green {
+  background: var(--sticky-green);
+  transform: rotate(0.5deg);
+}
+
+/* ========================================
+   和纸胶带装饰
+   ======================================== */
+.washi-tape {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  background: var(--washi-pink);
+  border-left: 4px solid rgba(0, 0, 0, 0.1);
+  border-right: 4px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+}
+
+.washi-tape-blue {
+  background: var(--washi-blue);
+}
+
+.washi-tape-green {
+  background: var(--washi-green);
+}
+
+/* ========================================
+   问题卡片 - 手写问题
+   ======================================== */
+.question-card {
+  position: relative;
+  background: var(--journal-paper);
+  border: 2px solid var(--ink-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-soft);
+}
+
+.question-card::before {
+  content: '?';
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background: var(--sticky-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--ink-primary);
+  color: var(--journal-paper);
+  border-radius: 50%;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--ink-primary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.question-hint {
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  border-left: 3px solid var(--journal-margin);
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+/* ========================================
+   输入框 - 手写感
+   ======================================== */
+.journal-input {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--ink-light);
+  color: var(--ink-primary);
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  transition: border-color 0.3s ease;
+  resize: none;
+}
+
+.journal-input:focus {
+  outline: none;
+  border-bottom-color: var(--ink-primary);
+  border-bottom-style: solid;
+}
+
+.journal-input::placeholder {
+  color: var(--pencil-light);
+  font-style: italic;
+}
+
+.journal-textarea {
+  min-height: 100px;
+  border: 2px dashed var(--ink-light);
+  border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   按钮 - 手绘风格
+   ======================================== */
+.journal-btn {
+  font-family: var(--font-hand);
+  padding: 0.75rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid var(--ink-primary);
+  background: var(--journal-paper);
+  color: var(--ink-primary);
+  position: relative;
+}
+
+.journal-btn::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--journal-paper);
+  z-index: -1;
+  transition: transform 0.2s ease;
+}
+
+.journal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--ink-light);
+}
+
+.journal-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.journal-btn-primary {
+  background: var(--ink-primary);
+  color: var(--journal-paper);
+}
+
+.journal-btn-primary::before {
+  background: var(--ink-primary);
+}
+
+.journal-btn-accent {
+  background: var(--sticky-yellow);
+  border-color: darken(var(--sticky-yellow), 20%);
+}
+
+.journal-btn-accent::before {
+  background: var(--sticky-yellow);
+}
+
+/* ========================================
+   进度指示 - 书签风格
+   ======================================== */
+.journal-progress {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border-bottom: 1px dashed var(--journal-lined);
+}
+
+.journal-progress-item {
+  position: relative;
+  padding: 0.75rem 1rem;
+  background: var(--journal-paper-dark);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.journal-progress-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--journal-margin);
+}
+
+.journal-progress-item.active {
+  background: var(--sticky-yellow);
+  color: var(--ink-primary);
+  transform: translateX(4px);
+}
+
+.journal-progress-item.active::before {
+  background: var(--ink-primary);
+}
+
+.journal-progress-item.completed {
+  background: var(--sticky-green);
+}
+
+.journal-progress-item.completed::before {
+  background: #4CAF50;
+}
+
+/* ========================================
+   状态链 - 箭头连接
+   ======================================== */
+.state-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+}
+
+.state-chain-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--journal-paper);
+  border-left: 3px solid var(--journal-margin);
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.state-chain-item::before {
+  content: '→';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--ink-faded);
+  font-size: 0.9rem;
+}
+
+.state-chain-item:first-child::before {
+  content: '●';
+}
+
+.state-chain-item.highlight {
+  background: var(--highlight-green);
+  border-left-color: #4CAF50;
+}
+
+.state-chain-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--journal-margin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.state-chain-item.highlight .state-chain-number {
+  background: #4CAF50;
+  color: white;
+}
+
+.state-chain-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--journal-lined);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.state-chain-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ink-light), #4CAF50);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* ========================================
+   可视化区域 - 手绘图表
+   ======================================== */
+.visualization-container {
+  background: var(--journal-paper);
+  border: 2px solid var(--ink-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.visualization-container::before {
+  content: '📊';
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background: var(--journal-paper);
+  padding: 0 8px;
+  font-size: 1.2rem;
+}
+
+.visualization-title {
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: var(--ink-secondary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* ========================================
+   滑块 - 铅笔画风格
+   ======================================== */
+.journal-slider {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--journal-lined);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.journal-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--journal-paper);
+  border: 2px solid var(--ink-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.journal-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.journal-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--journal-paper);
+  border: 2px solid var(--ink-primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ========================================
+   鼓励语 - 边注风格
+   ======================================== */
+.encouragement {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--highlight-green);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.encouragement::before {
+  content: '💡';
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  font-size: 1.2rem;
+}
+
+.encouragement-icon {
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+}
+
+.encouragement-text {
+  color: var(--ink-secondary);
+}
+
+.encouragement-text strong {
+  color: var(--ink-primary);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--ink-light);
+}
+
+/* ========================================
+   成功反馈 - 庆祝效果
+   ======================================== */
+.success-feedback {
+  text-align: center;
+  padding: 2rem;
+  animation: celebrateIn 0.6s ease;
+}
+
+@keyframes celebrateIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.success-title {
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  color: var(--ink-primary);
+  margin-bottom: 0.5rem;
+}
+
+.success-message {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink-light);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   折角效果
+   ======================================== */
+.folded-corner {
+  position: relative;
+}
+
+.folded-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent var(--journal-paper-dark) transparent transparent;
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+.journal-fade-in {
+  animation: journalFadeIn 0.5s ease;
+}
+
+@keyframes journalFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.journal-slide-in {
+  animation: journalSlideIn 0.4s ease;
+}
+
+@keyframes journalSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateX(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+.write-in {
+  animation: writeIn 0.8s ease;
+}
+
+@keyframes writeIn {
+  from { 
+    width: 0;
+    opacity: 0;
+  }
+  to { 
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   分割线 - 撕纸效果
+   ======================================== */
+.journal-divider {
+  height: 8px;
+  margin: 2rem 0;
+  background: 
+    linear-gradient(135deg, 
+      var(--journal-paper) 33.33%, 
+      transparent 33.33%
+    ),
+    linear-gradient(225deg, 
+      var(--journal-paper) 33.33%, 
+      transparent 33.33%
+    );
+  background-size: 8px 8px;
+  background-color: var(--journal-lined);
+  opacity: 0.5;
+}
+
+/* ========================================
+   标签 - 书签效果
+   ======================================== */
+.journal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--sticky-yellow);
+  font-family: var(--font-hand);
+  font-size: 0.9rem;
+  color: var(--ink-primary);
+  position: relative;
+}
+
+.journal-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.journal-tag-success {
+  background: var(--sticky-green);
+}
+
+.journal-tag-warning {
+  background: var(--sticky-pink);
+}
+
+.journal-tag-info {
+  background: var(--sticky-blue);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .journal-page {
+    padding: 2rem 1.5rem 3rem 2rem;
+  }
+  
+  .journal-theme::after {
+    left: 40px;
+  }
+  
+  .journal-title {
+    font-size: 2.2rem;
+  }
+  
+  .journal-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .question-text {
+    font-size: 1.2rem;
+  }
+  
+  .sticky-note {
+    transform: none;
+  }
+  
+  .coffee-stain {
+    display: none;
+  }
+}
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .journal-fade-in,
+  .journal-slide-in,
+  .write-in,
+  .success-feedback,
+  .success-icon {
+    animation: none;
+  }
+  
+  .journal-btn,
+  .journal-slider::-webkit-slider-thumb {
+    transition: none;
+  }
+}
+
+/* ========================================
+   打印样式
+   ======================================== */
+@media print {
+  .journal-theme {
+    background: white;
+  }
+  
+  .journal-theme::before,
+  .journal-theme::after {
+    display: none;
+  }
+  
+  .journal-btn {
+    display: none;
+  }
+  
+  .coffee-stain {
+    display: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-22 15:30
+   编辑人: Trae AI
+   说明: 手账/私人笔记本风格主题
+         像翻阅朋友的私人笔记，每一页都是思想实验
+         完全符合ThanksAndFrom.md "慢慢读，别着急" 的理念
+   ======================================== */

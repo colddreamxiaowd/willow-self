@@ -1,0 +1,128 @@
+# 财务自由模板
+# 适用于：想要改善财务状况、实现财务目标的人
+
+policies:
+  # ===== 记账与预算 =====
+  - name: "记账"
+    description: "记录每一笔收支"
+    impact:
+      finance: 0.3
+      awareness: 0.4
+    cost: 0.5
+
+  - name: "月度预算"
+    description: "每月制定预算并严格执行"
+    impact:
+      finance: 0.4
+      awareness: 0.3
+    cost: 1.0
+    dependencies:
+      - "记账"
+
+  - name: "周复盘"
+    description: "每周检查支出情况"
+    impact:
+      finance: 0.2
+      awareness: 0.2
+    cost: 0.5
+    dependencies:
+      - "记账"
+
+  # ===== 储蓄投资 =====
+  - name: "强制储蓄"
+    description: "每月收入的20%自动转入储蓄"
+    impact:
+      finance: 0.5
+      security: 0.4
+    cost: 1.0
+    dependencies:
+      - "记账"
+
+  - name: "应急基金"
+    description: "建立3-6个月支出的应急基金"
+    impact:
+      finance: 0.3
+      security: 0.5
+    cost: 1.5
+    dependencies:
+      - "强制储蓄"
+
+  - name: "投资学习"
+    description: "每周学习投资知识1小时"
+    impact:
+      finance: 0.3
+      growth: 0.3
+    cost: 1.0
+
+  - name: "定投"
+    description: "每月定投指数基金"
+    impact:
+      finance: 0.4
+      security: 0.2
+    cost: 1.0
+    dependencies:
+      - "投资学习"
+      - "强制储蓄"
+
+  # ===== 开源节流 =====
+  - name: "副业"
+    description: "发展一项副业，增加收入来源"
+    impact:
+      finance: 0.5
+      growth: 0.3
+    cost: 3.0
+
+  - name: "技能提升"
+    description: "提升职业技能，争取加薪"
+    impact:
+      finance: 0.4
+      growth: 0.4
+    cost: 2.0
+
+  - name: "减少外卖"
+    description: "减少外卖次数，自己做饭"
+    impact:
+      finance: 0.2
+      health: 0.2
+    cost: 1.5
+
+  - name: "理性消费"
+    description: "购买前等待24小时再决定"
+    impact:
+      finance: 0.3
+      awareness: 0.2
+    cost: 0.5
+
+  # ===== 债务管理 =====
+  - name: "还债计划"
+    description: "制定并执行还债计划"
+    impact:
+      finance: 0.4
+      stress: -0.3
+    cost: 2.0
+
+  - name: "避免新债"
+    description: "不再产生新的消费债务"
+    impact:
+      finance: 0.3
+      security: 0.3
+    cost: 1.0
+
+# 初始状态
+initial_state:
+  finance: 4.0        # 财务状况较差
+  security: 4.0       # 安全感不足
+  awareness: 5.0      # 觉察力一般
+  stress: 6.0         # 财务压力
+  growth: 5.0         # 成长一般
+
+# 目标状态
+target_state:
+  finance: 8.0        # 财务稳定
+  security: 8.0       # 安全感充足
+  awareness: 7.0      # 觉察力提升
+  stress: 4.0         # 压力降低
+  growth: 7.0         # 持续成长
+
+# 最后更新时间: 2026-02-21 20:00
+# 编辑人: Trae AI

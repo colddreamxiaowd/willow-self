@@ -1,0 +1,597 @@
+/* BookTheme.css - 温暖极简风格 */
+/* 设计理念：像阅读一本私人笔记，温暖而有深度，"慢慢读，别着急" */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+/* ========================================
+   温暖极简变量
+   ======================================== */
+:root {
+  /* 纸张颜色 - 温暖的米色系 */
+  --paper-white: #FFFEFA;
+  --paper-cream: #FDF8F3;
+  --paper-warm: #F8F4EE;
+  --paper-soft: #F5F0E8;
+  
+  /* 墨水颜色 - 深沉的墨色 */
+  --ink-deep: #1A1612;
+  --ink-primary: #2C2418;
+  --ink-secondary: #4A3F32;
+  --ink-light: #6B5D4D;
+  --ink-pale: #9A8B7A;
+  
+  /* 强调色 - 温暖的棕褐色 */
+  --accent-warm: #8B7355;
+  --accent-gold: #C9A86C;
+  --accent-soft: #D4C4A8;
+  
+  /* 功能色 - 柔和的自然色 */
+  --sage-green: #7A8B6E;
+  --soft-blue: #6B8299;
+  --gentle-pink: #C9A8A0;
+  
+  /* 阴影 - 柔和的阴影 */
+  --shadow-subtle: 0 1px 3px rgba(26, 22, 18, 0.04);
+  --shadow-soft: 0 2px 8px rgba(26, 22, 18, 0.06);
+  --shadow-medium: 0 4px 16px rgba(26, 22, 18, 0.08);
+  --shadow-gentle: 0 8px 24px rgba(26, 22, 18, 0.06);
+  
+  /* 圆角 - 柔和圆润 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* 字体 */
+  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+  
+  /* 过渡 */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-gentle: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   书籍容器 - 大量留白
+   ======================================== */
+.book-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #FAF8F5 0%, #F5F0E8 100%);
+  padding: 48px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================
+   书页 - 纯净纸张
+   ======================================== */
+.book-page {
+  flex: 1;
+  background: var(--paper-white);
+  position: relative;
+  box-shadow: var(--shadow-gentle);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+/* 左页 */
+.book-page.left-page {
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+/* 右页 */
+.book-page.right-page {
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  max-width: 220px;
+  min-width: 180px;
+  transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 右页折叠态 */
+.book-page.right-page.collapsed {
+  max-width: 60px;
+  min-width: 60px;
+}
+
+/* ========================================
+   书脊 - 几乎不可见
+   ======================================== */
+.book-spine {
+  width: 1px;
+  background: var(--ink-pale);
+  opacity: 0.3;
+  position: relative;
+  z-index: 10;
+}
+
+/* ========================================
+   页面内容 - 大量留白
+   ======================================== */
+.page-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 64px 72px;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+/* 自定义滚动条 - 极简 */
+.page-content::-webkit-scrollbar {
+  width: 3px;
+}
+
+.page-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-content::-webkit-scrollbar-thumb {
+  background: var(--ink-pale);
+  border-radius: 3px;
+}
+
+.page-content::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-light);
+}
+
+/* ========================================
+   书签容器 - 简洁列表
+   ======================================== */
+.bookmarks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 48px 24px;
+  overflow-y: auto;
+  position: relative;
+  transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 书签容器折叠态 */
+.bookmarks-container.collapsed {
+  padding: 48px 8px;
+}
+
+.bookmarks-container.collapsed .bookmarks-section {
+  margin-bottom: 16px;
+}
+
+.bookmarks-section {
+  margin-bottom: 24px;
+}
+
+.bookmarks-section:last-child {
+  margin-bottom: 0;
+}
+
+.bookmarks-section-title {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-pale);
+  margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+/* ========================================
+   书签按钮 - 极简线条
+   ======================================== */
+.bookmark-btn {
+  position: relative;
+  background: transparent;
+  padding: 14px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+/* 书签按钮折叠态 */
+.bookmark-btn.collapsed {
+  justify-content: center;
+  padding: 14px 8px;
+}
+
+.bookmark-btn.collapsed::before {
+  display: none;
+}
+
+.bookmark-btn.collapsed .bookmark-icon {
+  margin: 0;
+}
+
+/* 左侧指示线 */
+.bookmark-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 0;
+  background: var(--accent-warm);
+  border-radius: 1px;
+  transition: var(--transition-smooth);
+}
+
+/* 悬停效果 - 微妙变化 */
+.bookmark-btn:hover {
+  background: var(--paper-cream);
+  color: var(--ink-primary);
+}
+
+.bookmark-btn:hover::before {
+  height: 16px;
+}
+
+/* 激活状态 - 温暖米色背景 */
+.bookmark-btn.active {
+  background: var(--paper-warm);
+  color: var(--ink-deep);
+}
+
+.bookmark-btn.active::before {
+  height: 24px;
+  background: var(--accent-gold);
+}
+
+/* 书签图标 */
+.bookmark-btn .bookmark-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: var(--transition-smooth);
+  color: var(--ink-light);
+}
+
+.bookmark-btn:hover .bookmark-icon {
+  opacity: 0.7;
+}
+
+.bookmark-btn.active .bookmark-icon {
+  opacity: 1;
+  color: var(--accent-warm);
+}
+
+/* 书签文字 */
+.bookmark-btn .bookmark-label {
+  flex: 1;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   操作栏 - 浮动卡片
+   ======================================== */
+.action-bar {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper-white);
+  border-radius: var(--radius-lg);
+  padding: 12px 24px;
+  display: flex;
+  gap: 16px;
+  box-shadow: var(--shadow-medium);
+  z-index: 100;
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 操作按钮 */
+.action-btn {
+  background: transparent;
+  border: 1px solid var(--ink-pale);
+  border-radius: var(--radius-md);
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn:hover {
+  background: var(--paper-cream);
+  border-color: var(--ink-light);
+  color: var(--ink-primary);
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.action-btn.primary {
+  background: var(--ink-primary);
+  color: var(--paper-white);
+  border-color: var(--ink-primary);
+}
+
+.action-btn.primary:hover {
+  background: var(--ink-deep);
+  border-color: var(--ink-deep);
+}
+
+/* ========================================
+   空状态 - 居中留白
+   ======================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 48px;
+}
+
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink-primary);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.empty-state p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-light);
+  margin-bottom: 32px;
+  line-height: 1.8;
+  max-width: 400px;
+}
+
+/* ========================================
+   错误提示
+   ======================================== */
+.error-banner {
+  background: var(--paper-cream);
+  border-left: 3px solid var(--gentle-pink);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-secondary);
+  font-size: 14px;
+}
+
+/* ========================================
+   按钮通用样式
+   ======================================== */
+.btn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--ink-primary);
+  color: var(--paper-white);
+  border-color: var(--ink-primary);
+}
+
+.btn-primary:hover {
+  background: var(--ink-deep);
+  border-color: var(--ink-deep);
+}
+
+/* ========================================
+   折叠/展开切换按钮
+   ======================================== */
+.bookmark-toggle-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--ink-light);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  z-index: 10;
+}
+
+.bookmark-toggle-btn:hover {
+  background: var(--paper-cream);
+  color: var(--ink-primary);
+}
+
+/* 折叠态时切换按钮居中 */
+.bookmarks-container.collapsed .bookmark-toggle-btn {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+@media (max-width: 1400px) {
+  .book-container {
+    padding: 32px;
+  }
+  
+  .page-content {
+    padding: 48px 56px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .book-container {
+    padding: 24px;
+  }
+  
+  .page-content {
+    padding: 40px 48px;
+  }
+  
+  .bookmarks-container {
+    padding: 32px 20px;
+  }
+  
+  .book-page.right-page {
+    max-width: 200px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bookmark-btn {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  
+  .action-bar {
+    padding: 10px 20px;
+    gap: 12px;
+    bottom: 32px;
+  }
+  
+  .action-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .book-spine {
+    width: 100%;
+    height: 1px;
+    background: var(--ink-pale);
+    opacity: 0.2;
+  }
+  
+  .book-page {
+    min-height: 45vh;
+  }
+  
+  .book-page.right-page {
+    max-width: none;
+    min-width: auto;
+  }
+  
+  .page-content {
+    padding: 32px 24px;
+  }
+  
+  .bookmarks-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 8px;
+  }
+  
+  .bookmarks-section {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  
+  .bookmarks-section-title {
+    display: none;
+  }
+  
+  .bookmark-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+    width: auto;
+  }
+  
+  .bookmark-btn::before {
+    display: none;
+  }
+  
+  .action-bar {
+    flex-direction: column;
+    width: calc(100% - 48px);
+    bottom: 24px;
+  }
+  
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   可访问性
+   ======================================== */
+
+.bookmark-btn:focus,
+.action-btn:focus,
+.btn:focus {
+  outline: 2px solid var(--accent-warm);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bookmark-btn,
+  .action-btn,
+  .book-page,
+  .action-bar {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .bookmark-btn {
+    border: 1px solid var(--ink-light);
+  }
+  
+  .action-bar {
+    border: 2px solid var(--ink-primary);
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-26 23:05
+   编辑人: Trae AI
+   说明: 温暖极简风格 - 像阅读一本私人笔记，温暖而有深度，支持书签栏折叠
+   ======================================== */

@@ -1,0 +1,115 @@
+# 效率提升模板
+# 适用于：想要提高工作效率、改善时间管理的人
+
+policies:
+  # ===== 时间管理 =====
+  - name: "番茄工作法"
+    description: "使用番茄工作法，25分钟专注+5分钟休息"
+    impact:
+      productivity: 0.5
+      focus: 0.4
+    cost: 1.0
+
+  - name: "每日计划"
+    description: "每天早上花10分钟规划当日任务"
+    impact:
+      productivity: 0.4
+      awareness: 0.2
+    cost: 0.5
+
+  - name: "周复盘"
+    description: "每周日花30分钟回顾本周、规划下周"
+    impact:
+      productivity: 0.3
+      growth: 0.3
+      awareness: 0.4
+    cost: 1.0
+
+  # ===== 专注力 =====
+  - name: "手机勿扰"
+    description: "工作时间开启手机勿扰模式"
+    impact:
+      productivity: 0.4
+      focus: 0.5
+    cost: 0.5
+
+  - name: "清理桌面"
+    description: "每天工作前整理桌面，保持整洁"
+    impact:
+      productivity: 0.2
+      focus: 0.3
+    cost: 0.5
+
+  - name: "单任务处理"
+    description: "一次只做一件事，避免多任务"
+    impact:
+      productivity: 0.3
+      focus: 0.4
+    cost: 1.0
+
+  # ===== 学习成长 =====
+  - name: "阅读"
+    description: "每天阅读30分钟专业书籍"
+    impact:
+      growth: 0.4
+      focus: 0.2
+    cost: 0.5
+
+  - name: "技能学习"
+    description: "每周学习一项新技能，每次1小时"
+    impact:
+      growth: 0.5
+      productivity: 0.2
+    cost: 2.0
+
+  - name: "笔记整理"
+    description: "每天花15分钟整理学习笔记"
+    impact:
+      growth: 0.3
+      awareness: 0.2
+    cost: 0.5
+
+  # ===== 精力管理 =====
+  - name: "午休"
+    description: "每天午休20-30分钟"
+    impact:
+      energy: 0.4
+      productivity: 0.3
+    cost: 0.5
+
+  - name: "运动"
+    description: "每周运动3次，每次30分钟"
+    impact:
+      health: 0.4
+      energy: 0.4
+      focus: 0.2
+    cost: 2.0
+
+  # ===== 避免干扰 =====
+  - name: "戒社交媒体"
+    description: "工作时间不刷社交媒体"
+    impact:
+      productivity: 0.5
+      focus: 0.4
+    cost: 1.5
+    conflicts:
+      - "刷手机"
+
+# 初始状态
+initial_state:
+  productivity: 4.0   # 生产力较低
+  focus: 4.0          # 专注力不足
+  energy: 5.0         # 精力一般
+  growth: 5.0         # 成长一般
+  health: 5.0         # 健康一般
+
+# 目标状态
+target_state:
+  productivity: 8.0   # 生产力显著提升
+  focus: 8.0          # 专注力显著提升
+  energy: 7.0         # 精力充沛
+  growth: 7.5         # 持续成长
+  health: 7.0         # 健康良好
+
+# 最后更新时间: 2026-02-21 20:00
+# 编辑人: Trae AI

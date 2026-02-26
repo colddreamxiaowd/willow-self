@@ -1,0 +1,525 @@
+/* DataImport.css - 温暖极简风格 */
+/* 设计理念：像阅读一本私人笔记，温暖而有深度 */
+
+/* 遮罩层 */
+.data-import-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 22, 18, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 弹窗 */
+.data-import-modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  background: #FFFEFA;
+  border-radius: 12px;
+  border: 1px solid rgba(44, 36, 24, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(26, 22, 18, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 头部 */
+.import-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.import-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #2C2418;
+}
+
+.import-title h3 {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.import-title svg {
+  color: #C9A86C;
+}
+
+.import-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FDF8F3;
+  border: none;
+  border-radius: 6px;
+  color: #9A8B7A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.import-close:hover {
+  background: #F8F4EE;
+  color: #6B5D4D;
+}
+
+/* 内容区域 */
+.import-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 上传区域 */
+.upload-zone {
+  border: 2px dashed rgba(44, 36, 24, 0.15);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #FDF8F3;
+}
+
+.upload-zone:hover {
+  border-color: #C9A86C;
+  background: #F8F4EE;
+}
+
+.upload-zone.dragging {
+  border-color: #C9A86C;
+  background: #F8F4EE;
+}
+
+.upload-zone.has-error {
+  border-color: #C9A8A0;
+  background: rgba(201, 168, 160, 0.05);
+}
+
+.upload-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8F4EE;
+  border-radius: 12px;
+  color: #C9A86C;
+  transition: transform 0.3s ease;
+}
+
+.upload-zone:hover .upload-icon {
+  transform: translateY(-2px);
+}
+
+.upload-text {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 1rem;
+  color: #2C2418;
+  margin-bottom: 0.5rem;
+}
+
+.upload-text strong {
+  color: #8B7355;
+}
+
+.upload-hint {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: #9A8B7A;
+  margin: 0;
+}
+
+.upload-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(201, 168, 160, 0.1);
+  border-radius: 6px;
+  color: #6B5D4D;
+  font-size: 0.875rem;
+}
+
+/* 格式说明 */
+.format-info {
+  margin-top: 1.5rem;
+}
+
+.format-info h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #9A8B7A;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.format-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.format-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background: #FDF8F3;
+  border-radius: 8px;
+  border: 1px solid rgba(44, 36, 24, 0.04);
+  transition: background 0.2s ease;
+}
+
+.format-item:hover {
+  background: #F8F4EE;
+}
+
+.format-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: #F8F4EE;
+  color: #8B7355;
+}
+
+.format-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.format-label {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2C2418;
+}
+
+.format-desc {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.75rem;
+  color: #9A8B7A;
+}
+
+/* 模板下载 */
+.template-section {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: #FDF8F3;
+  border: 1px dashed rgba(201, 168, 108, 0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.template-section h4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: #8B7355;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.template-section p {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #9A8B7A;
+  margin-bottom: 1rem;
+}
+
+.btn-download-template {
+  padding: 0.625rem 1.25rem;
+  background: #F8F4EE;
+  border: 1px solid rgba(201, 168, 108, 0.3);
+  border-radius: 6px;
+  color: #8B7355;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-download-template:hover {
+  background: #F5F0E8;
+  border-color: #C9A86C;
+}
+
+/* 文件预览 */
+.file-preview {
+  animation: fadeIn 0.3s ease;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #2C2418;
+}
+
+.preview-header h4 {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.preview-content {
+  background: #FDF8F3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.preview-table-wrapper {
+  overflow-x: auto;
+}
+
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+}
+
+.preview-table th,
+.preview-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.preview-table th {
+  background: #F8F4EE;
+  font-weight: 500;
+  color: #6B5D4D;
+  white-space: nowrap;
+}
+
+.preview-table td {
+  color: #2C2418;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-table tr:hover td {
+  background: rgba(248, 244, 238, 0.5);
+}
+
+.preview-more {
+  text-align: center;
+  padding: 0.75rem;
+  color: #9A8B7A;
+  font-size: 0.8rem;
+  margin: 0;
+  border-top: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.preview-json {
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  color: #6B5D4D;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* 预览操作按钮 */
+.preview-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.btn-cancel,
+.btn-confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel {
+  background: #FDF8F3;
+  border: 1px solid rgba(44, 36, 24, 0.12);
+  color: #6B5D4D;
+}
+
+.btn-cancel:hover {
+  background: #F8F4EE;
+  color: #2C2418;
+}
+
+.btn-confirm {
+  background: #2C2418;
+  border: none;
+  color: #FFFEFA;
+}
+
+.btn-confirm:hover {
+  background: #1A1612;
+}
+
+/* 加载状态 */
+.preview-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #9A8B7A;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #F8F4EE;
+  border-top-color: #C9A86C;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 预览错误 */
+.preview-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: #6B5D4D;
+}
+
+.preview-error svg {
+  color: #C9A8A0;
+  margin-bottom: 0.75rem;
+}
+
+.preview-error p {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+/* 响应式适配 */
+@media (max-width: 640px) {
+  .data-import-modal {
+    max-height: 95vh;
+    margin: 0.5rem;
+  }
+
+  .import-content {
+    padding: 1rem;
+  }
+
+  .upload-zone {
+    padding: 1.5rem 1rem;
+  }
+
+  .upload-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .format-list {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-actions {
+    flex-direction: column;
+  }
+
+  .btn-cancel,
+  .btn-confirm {
+    justify-content: center;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .data-import-overlay,
+  .data-import-modal,
+  .upload-zone,
+  .file-preview {
+    animation: none;
+  }
+
+  .upload-zone:hover .upload-icon,
+  .btn-download-template:hover,
+  .btn-confirm:hover {
+    transform: none;
+  }
+
+  .loading-spinner {
+    animation: none;
+    border-top-color: #D4C4A8;
+  }
+}
+
+/* 最后更新时间: 2026-02-22 20:30
+   编辑人: Trae AI
+   说明: 温暖极简风格 - 数据导入组件 */

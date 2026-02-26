@@ -1,0 +1,707 @@
+/* WarmTheme.css - 温暖亲切的主题样式 */
+/* 设计理念：温暖、鼓励、不压抑，适合ADHD用户 */
+/* 参考：ThanksAndFrom.md 原始理念 - 人本主义、自我探索 */
+
+/* ========================================
+   温暖主题变量（新配色方案）
+   ======================================== */
+:root {
+  --warm-bg-primary: #FFF8F0;
+  --warm-bg-secondary: #FFF0E0;
+  --warm-bg-card: #FFFFFF;
+  
+  --warm-primary: #A8D5BA;
+  --warm-primary-light: #C5E8D0;
+  --warm-primary-dark: #7BC47F;
+  
+  --warm-accent: #FFB347;
+  --warm-accent-light: #FFCC80;
+  --warm-accent-dark: #F59E0B;
+  
+  --warm-text-primary: #4A4A4A;
+  --warm-text-secondary: #6B6B6B;
+  --warm-text-muted: #9B9B9B;
+  
+  --warm-success: #7BC47F;
+  --warm-warning: #F5A623;
+  --warm-error: #E57373;
+  
+  --warm-border: rgba(168, 213, 186, 0.3);
+  --warm-border-light: rgba(168, 213, 186, 0.15);
+  
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 40px rgba(168, 213, 186, 0.2);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ========================================
+   温暖背景
+   ======================================== */
+.warm-theme {
+  background: var(--warm-bg-primary);
+  min-height: 100vh;
+  color: var(--warm-text-primary);
+}
+
+.warm-theme::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 10% 10%, rgba(168, 213, 186, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(255, 179, 71, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(123, 196, 127, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ========================================
+   温暖卡片
+   ======================================== */
+.warm-card {
+  background: var(--warm-bg-card);
+  border: 1px solid var(--warm-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-normal);
+  padding: 1.5rem;
+}
+
+.warm-card:hover {
+  border-color: var(--warm-border);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.warm-card-interactive {
+  cursor: pointer;
+}
+
+.warm-card-interactive:hover {
+  box-shadow: var(--shadow-hover), var(--shadow-glow);
+}
+
+/* ========================================
+   温暖按钮
+   ======================================== */
+.warm-btn {
+  font-family: inherit;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.warm-btn-primary {
+  background: var(--warm-primary);
+  color: var(--warm-text-primary);
+  box-shadow: 0 4px 15px rgba(168, 213, 186, 0.4);
+}
+
+.warm-btn-primary:hover {
+  background: var(--warm-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 213, 186, 0.5);
+}
+
+.warm-btn-accent {
+  background: var(--warm-accent);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 179, 71, 0.4);
+}
+
+.warm-btn-accent:hover {
+  background: var(--warm-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 179, 71, 0.5);
+}
+
+.warm-btn-secondary {
+  background: transparent;
+  border: 2px solid var(--warm-primary);
+  color: var(--warm-primary-dark);
+}
+
+.warm-btn-secondary:hover {
+  background: var(--warm-primary-light);
+}
+
+.warm-btn-ghost {
+  background: transparent;
+  color: var(--warm-text-secondary);
+}
+
+.warm-btn-ghost:hover {
+  background: var(--warm-bg-secondary);
+  color: var(--warm-text-primary);
+}
+
+.warm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ========================================
+   温暖输入框
+   ======================================== */
+.warm-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--warm-bg-card);
+  border: 2px solid var(--warm-border-light);
+  border-radius: var(--radius-md);
+  color: var(--warm-text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all var(--transition-normal);
+}
+
+.warm-input:focus {
+  outline: none;
+  border-color: var(--warm-primary);
+  box-shadow: 0 0 0 4px rgba(168, 213, 186, 0.15);
+}
+
+.warm-input::placeholder {
+  color: var(--warm-text-muted);
+}
+
+.warm-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ========================================
+   温暖滑块
+   ======================================== */
+.warm-slider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--warm-bg-secondary);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.warm-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--warm-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(168, 213, 186, 0.4);
+  transition: transform var(--transition-fast);
+}
+
+.warm-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--warm-primary-dark);
+}
+
+.warm-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--warm-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* ========================================
+   鼓励性提示
+   ======================================== */
+.encouragement {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, 
+    rgba(168, 213, 186, 0.15), 
+    rgba(123, 196, 127, 0.1));
+  border: 1px solid rgba(168, 213, 186, 0.3);
+  border-radius: var(--radius-md);
+  margin: 1.25rem 0;
+}
+
+.encouragement-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.encouragement-text {
+  font-size: 0.95rem;
+  color: var(--warm-text-primary);
+  line-height: 1.6;
+}
+
+.encouragement-text strong {
+  color: var(--warm-primary-dark);
+}
+
+/* ========================================
+   进度指示
+   ======================================== */
+.warm-progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.warm-progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.warm-progress-step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-normal);
+  background: var(--warm-bg-secondary);
+  color: var(--warm-text-muted);
+  border: 2px solid transparent;
+}
+
+.warm-progress-step.active {
+  background: var(--warm-primary);
+  color: var(--warm-text-primary);
+  border-color: var(--warm-primary-dark);
+}
+
+.warm-progress-step.completed {
+  background: var(--warm-primary-dark);
+  color: white;
+}
+
+.warm-progress-connector {
+  flex: 1;
+  height: 3px;
+  background: var(--warm-bg-secondary);
+  border-radius: 2px;
+  transition: background var(--transition-normal);
+}
+
+.warm-progress-connector.completed {
+  background: var(--warm-primary);
+}
+
+.warm-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--warm-bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.warm-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--warm-primary), 
+    var(--warm-primary-dark));
+  border-radius: 4px;
+  transition: width var(--transition-slow);
+}
+
+.warm-progress-text {
+  font-size: 0.85rem;
+  color: var(--warm-text-muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ========================================
+   成功反馈
+   ======================================== */
+.success-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem;
+  text-align: center;
+  animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.success-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--warm-success);
+  margin-bottom: 0.75rem;
+}
+
+.success-message {
+  font-size: 1rem;
+  color: var(--warm-text-secondary);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   友好的标题
+   ======================================== */
+.warm-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--warm-text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.warm-title-accent {
+  color: var(--warm-primary-dark);
+}
+
+.warm-subtitle {
+  font-size: 1.1rem;
+  color: var(--warm-text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.warm-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--warm-text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ========================================
+   温暖标签
+   ======================================== */
+.warm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.warm-tag-success {
+  background: rgba(123, 196, 127, 0.15);
+  color: var(--warm-success);
+}
+
+.warm-tag-warning {
+  background: rgba(245, 166, 35, 0.15);
+  color: var(--warm-warning);
+}
+
+.warm-tag-info {
+  background: rgba(168, 213, 186, 0.2);
+  color: var(--warm-primary-dark);
+}
+
+.warm-tag-accent {
+  background: rgba(255, 179, 71, 0.15);
+  color: var(--warm-accent-dark);
+}
+
+/* ========================================
+   柔和的分割线
+   ======================================== */
+.warm-divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--warm-border-light), 
+    transparent);
+  margin: 1.5rem 0;
+}
+
+.warm-divider-solid {
+  height: 1px;
+  background: var(--warm-border-light);
+  margin: 1.5rem 0;
+}
+
+/* ========================================
+   问题卡片（思想实验专用）
+   ======================================== */
+.question-card {
+  background: var(--warm-bg-card);
+  border: 2px solid var(--warm-border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-normal);
+}
+
+.question-card:focus-within {
+  border-color: var(--warm-primary);
+  box-shadow: 0 0 0 4px rgba(168, 213, 186, 0.1);
+}
+
+.question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--warm-primary);
+  color: var(--warm-text-primary);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  font-size: 1.1rem;
+  color: var(--warm-text-primary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.question-hint {
+  font-size: 0.9rem;
+  color: var(--warm-text-muted);
+  font-style: italic;
+}
+
+/* ========================================
+   可视化区域
+   ======================================== */
+.visualization-container {
+  background: var(--warm-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.visualization-title {
+  font-size: 0.9rem;
+  color: var(--warm-text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* ========================================
+   状态链可视化（RSIP专用）
+   ======================================== */
+.state-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.state-chain-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--warm-bg-card);
+  border: 1px solid var(--warm-border-light);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.state-chain-item.highlight {
+  border-color: var(--warm-primary);
+  background: rgba(168, 213, 186, 0.1);
+}
+
+.state-chain-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--warm-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--warm-text-secondary);
+}
+
+.state-chain-item.highlight .state-chain-number {
+  background: var(--warm-primary);
+  color: var(--warm-text-primary);
+}
+
+.state-chain-content {
+  flex: 1;
+}
+
+.state-chain-text {
+  font-size: 0.95rem;
+  color: var(--warm-text-primary);
+}
+
+.state-chain-bar {
+  height: 6px;
+  background: var(--warm-bg-secondary);
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.state-chain-bar-fill {
+  height: 100%;
+  background: var(--warm-primary);
+  border-radius: 3px;
+  transition: width var(--transition-normal);
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+.warm-fade-in {
+  animation: warmFadeIn 0.5s ease;
+}
+
+@keyframes warmFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.warm-slide-up {
+  animation: warmSlideUp 0.4s ease;
+}
+
+@keyframes warmSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.warm-bounce {
+  animation: warmBounce 0.6s ease;
+}
+
+@keyframes warmBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.warm-pulse {
+  animation: warmPulse 2s infinite;
+}
+
+@keyframes warmPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .warm-title {
+    font-size: 1.5rem;
+  }
+  
+  .warm-subtitle {
+    font-size: 1rem;
+  }
+  
+  .warm-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .warm-card {
+    padding: 1.25rem;
+  }
+  
+  .question-card {
+    padding: 1.5rem;
+  }
+  
+  .encouragement {
+    padding: 1rem 1.25rem;
+  }
+  
+  .warm-progress-step {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .warm-card,
+  .warm-btn,
+  .warm-input,
+  .warm-slider::-webkit-slider-thumb,
+  .warm-progress-fill,
+  .success-feedback,
+  .warm-fade-in,
+  .warm-slide-up,
+  .warm-bounce,
+  .warm-pulse {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ========================================
+   打印样式
+   ======================================== */
+@media print {
+  .warm-theme {
+    background: white;
+  }
+  
+  .warm-theme::before {
+    display: none;
+  }
+  
+  .warm-btn {
+    display: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-22 14:00
+   编辑人: Trae AI
+   说明: 温暖亲切的主题样式，完全符合ThanksAndFrom.md原始理念
+         奶油白背景 + 浅绿主色 + 暖橙强调色
+         适合ADHD用户的单焦点、对话式设计
+   ======================================== */

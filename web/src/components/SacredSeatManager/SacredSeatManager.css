@@ -1,0 +1,1005 @@
+/* web/src/components/SacredSeatManager/SacredSeatManager.css */
+
+/* 管理器主容器 - 改为暖色/纸张风格，与 PolicyTreeEditor 一致 */
+.sacred-seat-manager {
+  background: #f5f5f0; /* 暖白/纸质背景 */
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333; /* 深色文字 */
+  min-height: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #dcdcdc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #6B8E6B; /* 莫兰迪绿边框 */
+}
+
+.manager-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #4a5d4a;
+}
+
+.close-btn {
+  background: #e0e0d5;
+  border: none;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: #d1d1c1;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.manager-intro {
+  background: #ecece4;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border-left: 4px solid #6B8E6B;
+}
+
+.manager-intro p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.manager-content {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+
+.seats-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #e0e0d5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #4a5d4a;
+}
+
+.create-btn {
+  background: #6B8E6B; /* 莫兰迪绿 */
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(107, 142, 107, 0.2);
+}
+
+.create-btn:hover {
+  background: #5a7a5a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 142, 107, 0.3);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.empty-state p {
+  margin: 8px 0;
+  color: #777;
+}
+
+.empty-hint {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.seats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 神圣座位卡片 */
+.sacred-seat-card {
+  background: #fff;
+  border: 1px solid #e0e0d5;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.sacred-seat-card:hover {
+  background: #fafafa;
+  border-color: #6B8E6B;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sacred-seat-card.selected {
+  border-color: #6B8E6B;
+  border-width: 2px;
+  background: #f1f8f1;
+  box-shadow: 0 4px 15px rgba(107, 142, 107, 0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.trigger-icon {
+  font-size: 1.4rem;
+  background: #f0f0e8;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.policy-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.card-condition {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  align-items: center;
+}
+
+.condition-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.condition-value {
+  color: #6B8E6B;
+  font-weight: 600;
+  background: #f0f4f0;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.card-commitment {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f9f9f5;
+  border-radius: 6px;
+  border-left: 3px solid #dcdcdc;
+}
+
+.commitment-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.commitment-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.card-stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0e8;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.stat-value.warning {
+  color: #d97706; /* 琥珀色 */
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 2px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed #e0e0d5;
+}
+
+.card-actions .action-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  background: #fff;
+}
+
+.card-actions .action-btn.violation {
+  border-color: #fbd5d5;
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.card-actions .action-btn.violation:hover {
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
+.card-actions .action-btn.delete {
+  border-color: #e5e7eb;
+  color: #6b7280;
+}
+
+.card-actions .action-btn.delete:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* 详情面板 */
+.seat-detail {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #e0e0d5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-actions .action-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.detail-actions .record-btn {
+  background: #dc2626;
+  color: #fff;
+}
+
+.detail-actions .record-btn:hover {
+  background: #b91c1c;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.detail-actions .whitelist-btn {
+  background: #f0f0e8;
+  color: #555;
+  border: 1px solid #dcdcdc;
+}
+
+.detail-actions .whitelist-btn:hover {
+  background: #e0e0d5;
+  color: #333;
+}
+
+/* 违规记录器 (ManualViolationRecorder) */
+.manual-violation-recorder {
+  background: #fff;
+  width: 500px;
+  max-width: 95vw;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0d5;
+  color: #333;
+}
+
+.recorder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+
+.recorder-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #dc2626;
+}
+
+.recorder-intro {
+  background: #fff5f5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #dc2626;
+}
+
+.recorder-intro p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.quick-behaviors {
+  margin-bottom: 24px;
+}
+
+.quick-behaviors h5, 
+.custom-behavior h5, 
+.decision-section h5 {
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.behaviors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.quick-behavior-btn {
+  background: #f9f9f5;
+  border: 1px solid #e0e0d5;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.quick-behavior-btn:hover {
+  background: #f0f0e8;
+  border-color: #6B8E6B;
+}
+
+.quick-behavior-btn.selected {
+  background: #f1f8f1;
+  border-color: #6B8E6B;
+  box-shadow: 0 2px 8px rgba(107, 142, 107, 0.2);
+}
+
+.behavior-icon {
+  font-size: 1.4rem;
+}
+
+.behavior-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.behavior-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.category-selector {
+  margin-bottom: 20px;
+}
+
+.category-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.category-btn {
+  padding: 6px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.category-btn.selected {
+  background: var(--category-color);
+  color: #fff;
+  border-color: var(--category-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.decision-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.decision-option {
+  padding: 16px;
+  border: 2px solid #e0e0d5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.decision-option:hover {
+  border-color: #dcdcdc;
+  background: #fafafa;
+}
+
+.decision-option.reject.selected {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.decision-option.allow.selected {
+  border-color: #6B8E6B;
+  background: #f1f8f1;
+}
+
+.option-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.option-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.reason-input textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.action-buttons {
+  margin-top: 24px;
+}
+
+.confirm-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirm-btn.reject-btn {
+  background: #dc2626;
+  color: #fff;
+}
+
+.confirm-btn.allow-btn {
+  background: #6B8E6B;
+  color: #fff;
+}
+
+.confirm-btn.disabled {
+  background: #e0e0d5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* 信任机制提醒 */
+.trust-reminder {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: #f9f9f5;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.tip-icon {
+  background: #dcdcdc;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* 遮罩层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* 神圣座位创建器 (SacredSeatCreator) */
+.sacred-seat-creator-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.sacred-seat-creator {
+  background: #f5f5f0;
+  width: 600px;
+  max-width: 95vw;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid #dcdcdc;
+  overflow: hidden;
+  color: #333;
+}
+
+.creator-header {
+  background: #fff;
+  padding: 24px;
+  border-bottom: 1px solid #e0e0d5;
+}
+
+.creator-header h3 {
+  margin: 0 0 16px 0;
+  color: #4a5d4a;
+  font-size: 1.4rem;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.step-indicator span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #999;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #e0e0d5;
+  transition: all 0.3s;
+}
+
+.step-indicator span.active {
+  color: #6B8E6B;
+  border-bottom-color: #6B8E6B;
+  font-weight: 700;
+}
+
+.creator-content {
+  padding: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.step-content h4 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.step-desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.option-btn {
+  background: #fff;
+  border: 1px solid #e0e0d5;
+  padding: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.option-btn:hover {
+  background: #fafafa;
+  border-color: #6B8E6B;
+  transform: translateY(-2px);
+}
+
+.option-btn.selected {
+  background: #f1f8f1;
+  border-color: #6B8E6B;
+  border-width: 2px;
+  box-shadow: 0 4px 12px rgba(107, 142, 107, 0.1);
+}
+
+.option-icon {
+  font-size: 2rem;
+}
+
+.option-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.custom-input-section {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.custom-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.confirm-custom-btn {
+  background: #6B8E6B;
+  color: #fff;
+  border: none;
+  padding: 0 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.commitment-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.commitment-input-group label {
+  font-weight: 700;
+  color: #4a5d4a;
+}
+
+.commitment-input-group textarea {
+  padding: 16px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  min-height: 100px;
+  box-sizing: border-box;
+}
+
+.creator-footer {
+  padding: 16px 24px;
+  background: #fff;
+  border-top: 1px solid #e0e0d5;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.creator-footer button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.back-btn {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  color: #666;
+}
+
+.cancel-btn-alt {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  color: #999;
+}
+
+.next-btn {
+  background: #6B8E6B;
+  border: none;
+  color: #fff;
+  flex: 1;
+}
+
+.next-btn:disabled {
+  background: #e0e0d5;
+  cursor: not-allowed;
+}
+
+/* 行为白名单 (BehaviorWhitelist) */
+.behavior-whitelist {
+  background: #fff;
+  width: 500px;
+  max-width: 95vw;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0d5;
+  color: #333;
+}
+
+.whitelist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+
+.whitelist-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #6B8E6B;
+}
+
+.whitelist-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.behavior-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f9f9f5;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #e0e0d5;
+}
+
+.behavior-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-behavior-btn {
+  background: #fff;
+  border: 1px solid #fbd5d5;
+  color: #dc2626;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.remove-behavior-btn:hover {
+  background: #fee2e2;
+  transform: scale(1.1);
+}
+
+/* 违约记录 (ViolationHistory) */
+.violation-history {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e0e0d5;
+}
+
+.violation-history h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  color: #4a5d4a;
+  border-bottom: 1px solid #f0f0e8;
+  padding-bottom: 8px;
+}
+
+.no-violations {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.success-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.no-violations p {
+  margin: 4px 0;
+  color: #777;
+}
+
+.no-violations .hint {
+  font-size: 0.85rem;
+  color: #6B8E6B;
+}
+
+.violations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.violation-item {
+  background: #fdf2f2;
+  border-left: 4px solid #f87171;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.violation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.violation-reason {
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+
+.violation-date {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.violation-note {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.violation-summary {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed #e0e0d5;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.violation-summary strong {
+  color: #dc2626;
+}
+
+.summary-hint {
+  margin: 4px 0 0 0;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* 适配移动端 */
+@media (max-width: 768px) {
+  .manager-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sacred-seat-manager {
+    padding: 16px;
+    margin: 10px;
+    width: auto;
+  }
+}
+
+/* 最后更新时间: 2026-02-26 15:30 */
+/* 编辑人: Trae AI */
+/* 更新内容: 统一 UI 风格为暖色/纸质风格，与 PolicyTreeEditor 保持一致 */

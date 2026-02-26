@@ -1,0 +1,217 @@
+/* ========================================
+   ScoreDisplay 温暖极简风格
+   设计理念：像阅读一本私人笔记，温暖而有深度
+   ======================================== */
+
+.score-display {
+  background: #FFFEFA;
+  border-top: 1px solid rgba(44, 36, 24, 0.06);
+  padding: 24px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.score-title {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  color: #2C2418;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  letter-spacing: 1px;
+}
+
+.score-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #FDF8F3;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid rgba(44, 36, 24, 0.04);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(201, 168, 108, 0.3);
+  box-shadow: 0 4px 12px rgba(201, 168, 108, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  display: block;
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #8B7355;
+}
+
+.stat-label {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.7rem;
+  color: #9A8B7A;
+  margin-top: 4px;
+}
+
+.grade-distribution {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.grade-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FDF8F3;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(44, 36, 24, 0.04);
+  transition: all 0.2s ease;
+}
+
+.grade-item:hover {
+  background: #F8F4EE;
+  border-color: rgba(44, 36, 24, 0.08);
+}
+
+.grade-icon {
+  flex-shrink: 0;
+}
+
+.grade-icon.preferred {
+  color: #C9A86C;
+}
+
+.grade-icon.leverage {
+  color: #8B7355;
+}
+
+.grade-icon.defensive {
+  color: #6B8299;
+}
+
+.grade-icon.aggressive {
+  color: #7A8B6E;
+}
+
+.grade-name {
+  flex: 1;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #4A3F32;
+}
+
+.grade-count {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-weight: 500;
+  color: #2C2418;
+}
+
+.top-nodes h4 {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #6B5D4D;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.top-nodes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-node-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.04);
+}
+
+.top-node-item:last-child {
+  border-bottom: none;
+}
+
+.rank {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  color: #C9A86C;
+  font-weight: 500;
+  font-size: 0.75rem;
+  min-width: 24px;
+}
+
+.node-name {
+  flex: 1;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #4A3F32;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.node-score {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #8B7355;
+  font-weight: 500;
+}
+
+.formula-reminder {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.formula-reminder code {
+  display: block;
+  background: #FDF8F3;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.75rem;
+  color: #6B5D4D;
+  text-align: center;
+  border: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+/* ========================================
+   响应式调整
+   ======================================== */
+
+@media (max-width: 768px) {
+  .score-display {
+    padding: 16px;
+  }
+  
+  .score-overview {
+    gap: 8px;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.4rem;
+  }
+  
+  .grade-distribution {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-22 20:15
+   编辑人: Trae AI
+   说明: 温暖极简风格 - 像阅读一本私人笔记
+   ======================================== */

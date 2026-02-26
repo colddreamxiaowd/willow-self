@@ -1,0 +1,415 @@
+/* GuidedWizard.css - 引导式问答组件样式 */
+/* 设计理念：温暖、亲切、易懂，适合ADHD用户 */
+
+/* ========================================
+   主容器
+   ======================================== */
+.guided-wizard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(5, 5, 8, 0.95) 0%, 
+    rgba(10, 10, 18, 0.98) 100%);
+  padding: 1.5rem;
+  position: relative;
+}
+
+/* ========================================
+   进度条
+   ======================================== */
+.wizard-header {
+  margin-bottom: 2rem;
+}
+
+.wizard-progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--cyber-green, #00ff88), 
+    var(--cyber-cyan, #00f0ff));
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.progress-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   步骤标题
+   ======================================== */
+.step-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.step-title h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.step-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+/* ========================================
+   选项卡片网格
+   ======================================== */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.option-card:hover {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: rgba(0, 255, 136, 0.3);
+  transform: translateY(-2px);
+}
+
+.option-card.selected {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--cyber-green, #00ff88);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.option-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.option-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.25rem;
+}
+
+.option-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.option-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: var(--cyber-green, #00ff88);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyber-darker, #050508);
+}
+
+/* ========================================
+   文本输入
+   ======================================== */
+.text-input-container {
+  margin-bottom: 1.5rem;
+}
+
+.wizard-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.wizard-textarea:focus {
+  outline: none;
+  border-color: var(--cyber-green, #00ff88);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.wizard-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.input-help {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ========================================
+   滑块
+   ======================================== */
+.slider-container {
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.slider-value-display {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.slider-number {
+  font-family: 'Orbitron', monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--cyber-green, #00ff88);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.slider-label {
+  display: block;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25rem;
+}
+
+.wizard-slider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.wizard-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, 
+    var(--cyber-green, #00ff88), 
+    var(--cyber-cyan, #00f0ff));
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.wizard-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.wizard-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, 
+    var(--cyber-green, #00ff88), 
+    var(--cyber-cyan, #00f0ff));
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================
+   底部操作区
+   ======================================== */
+.wizard-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-help {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.btn-help:hover {
+  color: var(--cyber-cyan, #00f0ff);
+}
+
+.wizard-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-back,
+.btn-next {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-next {
+  background: linear-gradient(135deg, 
+    var(--cyber-green, #00ff88), 
+    var(--cyber-cyan, #00f0ff));
+  border: none;
+  color: var(--cyber-darker, #050508);
+  font-weight: 700;
+}
+
+.btn-next:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+}
+
+.btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   YAML切换按钮
+   ======================================== */
+.yaml-switch {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.switch-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  transition: color 0.3s ease;
+}
+
+.switch-btn:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 600px) {
+  .guided-wizard {
+    padding: 1rem;
+  }
+  
+  .options-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .step-title h2 {
+    font-size: 1.25rem;
+  }
+  
+  .slider-number {
+    font-size: 2.5rem;
+  }
+  
+  .wizard-footer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .wizard-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .btn-back,
+  .btn-next {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar,
+  .option-card,
+  .wizard-textarea,
+  .btn-next,
+  .btn-back {
+    transition: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 17:35
+   编辑人: Trae AI
+   ======================================== */

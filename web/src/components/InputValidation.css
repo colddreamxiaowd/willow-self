@@ -1,0 +1,341 @@
+/* InputValidation.css - 输入验证和错误提示样式 */
+/* 设计理念：友好、不突兀、有帮助性 */
+
+/* ========================================
+   验证包装器
+   ======================================== */
+.input-validation-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-container {
+  position: relative;
+}
+
+/* 状态样式 */
+.input-validation-wrapper.valid .input-container input,
+.input-validation-wrapper.valid .input-container textarea {
+  border-color: rgba(0, 255, 136, 0.4);
+}
+
+.input-validation-wrapper.invalid .input-container input,
+.input-validation-wrapper.invalid .input-container textarea {
+  border-color: rgba(255, 100, 100, 0.5);
+  animation: shake 0.3s ease;
+}
+
+.input-validation-wrapper.warning .input-container input,
+.input-validation-wrapper.warning .input-container textarea {
+  border-color: rgba(255, 204, 0, 0.4);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ========================================
+   验证消息
+   ======================================== */
+.validation-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.validation-message.error {
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.2);
+  color: #ff8888;
+}
+
+.validation-message.warning {
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid rgba(255, 204, 0, 0.2);
+  color: #ffcc66;
+}
+
+.validation-message.success {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  color: #66ffaa;
+}
+
+.validation-message.info {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: #88ddff;
+}
+
+.message-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.message-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.message-dismiss {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.message-dismiss:hover {
+  opacity: 1;
+}
+
+/* ========================================
+   验证反馈区域
+   ======================================== */
+.validation-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.validation-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+/* ========================================
+   表单验证摘要
+   ======================================== */
+.validation-summary {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.validation-summary.success {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  color: #66ffaa;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.validation-summary:not(.success) {
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.2);
+}
+
+.summary-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.summary-section.errors {
+  color: #ff8888;
+}
+
+.summary-section.warnings {
+  color: #ffcc66;
+  margin-top: 0.5rem;
+}
+
+/* ========================================
+   实时验证指示器
+   ======================================== */
+.validation-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.validation-indicator.valid {
+  color: var(--cyber-green, #00ff88);
+}
+
+.validation-indicator.invalid {
+  color: #ff6666;
+}
+
+.validation-indicator.checking {
+  color: var(--cyber-cyan, #00f0ff);
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ========================================
+   字段状态标签
+   ======================================== */
+.field-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.field-status.required {
+  background: rgba(255, 100, 100, 0.1);
+  color: #ff8888;
+}
+
+.field-status.optional {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.field-status.valid {
+  background: rgba(0, 255, 136, 0.1);
+  color: #66ffaa;
+}
+
+/* ========================================
+   输入框增强样式
+   ======================================== */
+.input-validation-wrapper input:focus,
+.input-validation-wrapper textarea:focus {
+  outline: none;
+}
+
+.input-validation-wrapper.valid input:focus,
+.input-validation-wrapper.valid textarea:focus {
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
+}
+
+.input-validation-wrapper.invalid input:focus,
+.input-validation-wrapper.invalid textarea:focus {
+  box-shadow: 0 0 0 2px rgba(255, 100, 100, 0.2);
+}
+
+/* ========================================
+   友好的错误提示气泡
+   ======================================== */
+.error-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: rgba(255, 80, 80, 0.95);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  animation: bubbleIn 0.3s ease;
+  z-index: 10;
+}
+
+.error-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  border: 6px solid transparent;
+  border-top-color: rgba(255, 80, 80, 0.95);
+}
+
+@keyframes bubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   进度指示器（多字段表单）
+   ======================================== */
+.form-progress {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.progress-segment.valid {
+  background: var(--cyber-green, #00ff88);
+}
+
+.progress-segment.invalid {
+  background: #ff6666;
+}
+
+.progress-segment.current {
+  background: var(--cyber-cyan, #00f0ff);
+  animation: currentPulse 1.5s ease infinite;
+}
+
+@keyframes currentPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 600px) {
+  .validation-message {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .error-bubble {
+    white-space: normal;
+    max-width: 200px;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 19:30
+   编辑人: Trae AI
+   ======================================== */

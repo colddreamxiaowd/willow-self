@@ -1,0 +1,612 @@
+/* ShareExport.css - 温暖极简风格 */
+/* 设计理念：像阅读一本私人笔记，温暖而有深度 */
+
+/* 遮罩层 */
+.share-export-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 22, 18, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 弹窗 */
+.share-export-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  background: #FFFEFA;
+  border-radius: 12px;
+  border: 1px solid rgba(44, 36, 24, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(26, 22, 18, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 头部 */
+.share-export-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.share-export-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #2C2418;
+}
+
+.share-export-title h3 {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.share-export-title svg {
+  color: #C9A86C;
+}
+
+.share-export-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FDF8F3;
+  border: none;
+  border-radius: 6px;
+  color: #9A8B7A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-export-close:hover {
+  background: #F8F4EE;
+  color: #6B5D4D;
+}
+
+/* 标签页 */
+.share-export-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #9A8B7A;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background: #FDF8F3;
+  color: #6B5D4D;
+}
+
+.tab.active {
+  background: #F8F4EE;
+  border-color: rgba(201, 168, 108, 0.3);
+  color: #8B7355;
+}
+
+/* 内容区域 */
+.share-export-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* 无数据提示 */
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #9A8B7A;
+}
+
+.no-data svg {
+  color: #D4C4A8;
+  margin-bottom: 1rem;
+}
+
+.no-data h4 {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 1rem;
+  color: #6B5D4D;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.no-data p {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* 导出面板 */
+.export-panel,
+.share-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+/* 格式选择器 */
+.format-selector,
+.share-method-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.format-btn,
+.method-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: #FDF8F3;
+  border: 1px solid rgba(44, 36, 24, 0.08);
+  border-radius: 6px;
+  color: #6B5D4D;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.format-btn:hover,
+.method-btn:hover {
+  background: #F8F4EE;
+  border-color: rgba(44, 36, 24, 0.12);
+  color: #2C2418;
+}
+
+.format-btn.active,
+.method-btn.active {
+  background: #F8F4EE;
+  border-color: #C9A86C;
+  color: #8B7355;
+}
+
+/* 导出/分享区块 */
+.export-section,
+.share-section {
+  animation: slideUp 0.3s ease;
+}
+
+.export-section h4,
+.share-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.95rem;
+  color: #2C2418;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.export-section > p,
+.share-section > p {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: #9A8B7A;
+  margin-bottom: 1.25rem;
+}
+
+/* 图片预览 */
+.image-preview {
+  background: #FDF8F3;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(26, 22, 18, 0.08);
+}
+
+/* 代码预览 */
+.code-preview {
+  position: relative;
+  background: #FDF8F3;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.code-preview pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  color: #6B5D4D;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.code-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, #FDF8F3);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+  color: #9A8B7A;
+  font-size: 0.8rem;
+}
+
+/* 导出操作按钮 */
+.export-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-copy,
+.btn-export {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btn-copy {
+  background: #FDF8F3;
+  border: 1px solid rgba(44, 36, 24, 0.12);
+  color: #6B5D4D;
+}
+
+.btn-copy:hover {
+  background: #F8F4EE;
+  color: #2C2418;
+}
+
+.btn-export {
+  background: #2C2418;
+  border: none;
+  color: #FFFEFA;
+}
+
+.btn-export:hover:not(:disabled) {
+  background: #1A1612;
+}
+
+.btn-export:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 加载动画 */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 生成中状态 */
+.generating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #9A8B7A;
+  gap: 0.75rem;
+}
+
+.generating svg {
+  color: #C9A86C;
+}
+
+/* 分享链接 */
+.share-link-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.share-link-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #FDF8F3;
+  border: 1px solid rgba(44, 36, 24, 0.08);
+  border-radius: 6px;
+  color: #2C2418;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.share-link-input:focus {
+  border-color: #C9A86C;
+}
+
+.btn-copy-link {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 1rem;
+  background: #F8F4EE;
+  border: 1px solid rgba(201, 168, 108, 0.3);
+  border-radius: 6px;
+  color: #8B7355;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-copy-link:hover {
+  background: #F5F0E8;
+  border-color: #C9A86C;
+}
+
+.btn-copy-link.copied {
+  background: #F8F4EE;
+  border-color: #C9A86C;
+  color: #8B7355;
+}
+
+.share-hint {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #9A8B7A;
+  padding: 0.75rem;
+  background: #FDF8F3;
+  border-radius: 6px;
+  border: 1px dashed rgba(201, 168, 108, 0.2);
+}
+
+/* 二维码 */
+.qr-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: #FDF8F3;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.qr-code img {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(26, 22, 18, 0.08);
+}
+
+.qr-code p {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: #9A8B7A;
+  margin: 0;
+}
+
+/* 分享错误 */
+.share-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  color: #6B5D4D;
+  background: rgba(201, 168, 160, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* 社交分享按钮 */
+.social-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 100px;
+  border: none;
+}
+
+.btn-social.weibo {
+  background: #F8F4EE;
+  color: #8B7355;
+}
+
+.btn-social.weibo:hover {
+  background: #F5F0E8;
+}
+
+.btn-social.twitter {
+  background: #F8F4EE;
+  color: #6B8299;
+}
+
+.btn-social.twitter:hover {
+  background: #F5F0E8;
+}
+
+.btn-social.email {
+  background: #F8F4EE;
+  color: #7A8B6E;
+}
+
+.btn-social.email:hover {
+  background: #F5F0E8;
+}
+
+/* 导出信息样式 */
+.export-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 8px;
+}
+
+.export-info h5 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+  color: #4A3F32;
+}
+
+.export-info ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  color: #6B5D4D;
+}
+
+.export-info li {
+  margin-bottom: 0.25rem;
+}
+
+.export-info .info-hint {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.8rem;
+  color: #9A8B7A;
+  font-style: italic;
+}
+
+/* 响应式适配 */
+@media (max-width: 640px) {
+  .share-export-modal {
+    max-height: 95vh;
+    margin: 0.5rem;
+  }
+
+  .share-export-content {
+    padding: 1rem;
+  }
+
+  .format-selector,
+  .share-method-selector {
+    flex-direction: column;
+  }
+
+  .format-btn,
+  .method-btn {
+    justify-content: center;
+  }
+
+  .share-link-box {
+    flex-direction: column;
+  }
+
+  .export-actions,
+  .social-buttons {
+    flex-direction: column;
+  }
+
+  .btn-copy,
+  .btn-export,
+  .btn-social {
+    width: 100%;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .share-export-overlay,
+  .share-export-modal,
+  .export-panel,
+  .share-panel,
+  .export-section,
+  .share-section {
+    animation: none;
+  }
+
+  .spin {
+    animation: none;
+  }
+
+  .btn-export:hover,
+  .btn-copy:hover,
+  .btn-copy-link:hover,
+  .btn-social:hover {
+    transform: none;
+  }
+}
+
+/* 最后更新时间: 2026-02-22 20:35
+   编辑人: Trae AI
+   说明: 温暖极简风格 - 分享导出组件 */

@@ -1,0 +1,590 @@
+/* ========================================
+   PolicyTree Cyberpunk Node Styles v2.0
+   独特的赛博朋克风格节点设计
+   ======================================== */
+
+/* 导入独特字体 */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap');
+
+/* CSS变量 - 赛博朋克配色 */
+:root {
+  --cyber-green: #00ff88;
+  --cyber-cyan: #00f0ff;
+  --cyber-purple: #bf00ff;
+  --cyber-pink: #ff0080;
+  --cyber-yellow: #ffcc00;
+  --cyber-red: #ff0040;
+  --cyber-dark: #0a0a0f;
+  --cyber-darker: #050508;
+  --cyber-gray: #1a1a2e;
+  --cyber-light: #2a2a4e;
+  --glow-intensity: 0.8;
+}
+
+/* 容器背景 - 动态网格效果 */
+.policy-tree-container {
+  flex: 1;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(191, 0, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 255, 136, 0.04) 0%, transparent 70%),
+    var(--cyber-darker);
+  background-size: 
+    50px 50px,
+    50px 50px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    background-position: 
+      0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+  }
+  50% {
+    background-position: 
+      25px 25px, 25px 25px, 0 0, 0 0, 0 0, 0 0;
+  }
+}
+
+/* ========================================
+   基础节点样式 - 六边形科技感
+   ======================================== */
+
+.policy-node,
+.intervention-node,
+.root-node {
+  position: relative;
+  background: 
+    linear-gradient(135deg, 
+      rgba(26, 26, 46, 0.98) 0%, 
+      rgba(42, 42, 78, 0.95) 50%,
+      rgba(26, 26, 46, 0.98) 100%);
+  border: none;
+  border-radius: 4px;
+  padding: 16px 20px;
+  min-width: 200px;
+  max-width: 260px;
+  font-family: 'Rajdhani', sans-serif;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(20px);
+  overflow: visible;
+  animation: nodeSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 节点入场动画 */
+@keyframes nodeSlideIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(30px) rotateX(20deg);
+    filter: blur(10px);
+  }
+  60% {
+    transform: scale(1.05) translateY(-5px) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+/* 节点边框 - 动态扫描线效果 */
+.policy-node::before,
+.intervention-node::before,
+.root-node::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  padding: 2px;
+  background: linear-gradient(90deg, 
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-green));
+  background-size: 200% 100%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderScan 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes borderScan {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 节点角落装饰 */
+.policy-node::after,
+.intervention-node::after,
+.root-node::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--cyber-green);
+  transition: all 0.3s ease;
+}
+
+.policy-node::after {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.intervention-node::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+  border-color: var(--cyber-cyan);
+}
+
+.root-node::after {
+  top: 50%;
+  right: -2px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 60%;
+  border: none;
+  border-right: 2px solid var(--cyber-purple);
+  border-radius: 0;
+}
+
+/* 节点悬停效果 - 全息投影感 */
+.policy-node:hover,
+.intervention-node:hover,
+.root-node:hover {
+  transform: 
+    scale(1.06) 
+    translateY(-8px) 
+    translateZ(20px);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 255, 136, 0.15),
+    0 0 80px rgba(0, 240, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.policy-node:hover::after {
+  width: 20px;
+  height: 20px;
+  border-color: var(--cyber-cyan);
+  box-shadow: 
+    -3px -3px 10px rgba(0, 240, 255, 0.5),
+    inset 3px 3px 10px rgba(0, 240, 255, 0.2);
+}
+
+/* ========================================
+   干预节点 - 特殊高亮效果
+   ======================================== */
+
+.intervention-node {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 255, 136, 0.15) 0%, 
+      rgba(0, 240, 255, 0.1) 50%,
+      rgba(0, 255, 136, 0.15) 100%),
+    linear-gradient(135deg, 
+      rgba(26, 26, 46, 0.95) 0%, 
+      rgba(42, 42, 78, 0.9) 100%);
+  animation: 
+    nodeSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    interventionPulse 2s ease-in-out infinite;
+}
+
+@keyframes interventionPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 0.3),
+      0 0 60px rgba(0, 255, 136, 0.15),
+      inset 0 0 30px rgba(0, 255, 136, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(0, 255, 136, 0.5),
+      0 0 100px rgba(0, 255, 136, 0.25),
+      inset 0 0 50px rgba(0, 255, 136, 0.1);
+  }
+}
+
+.intervention-node::before {
+  background: linear-gradient(90deg, 
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-green),
+    var(--cyber-cyan));
+  animation: borderScan 1.5s linear infinite;
+}
+
+/* 干预节点内部光效 */
+.intervention-node .node-highlight {
+  background: 
+    linear-gradient(90deg, 
+      rgba(0, 255, 136, 0.3), 
+      rgba(0, 240, 255, 0.3));
+  animation: highlightFlicker 0.1s ease-in-out infinite;
+}
+
+@keyframes highlightFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+
+/* ========================================
+   根节点 - 顶级视觉效果
+   ======================================== */
+
+.root-node {
+  background: 
+    linear-gradient(135deg, 
+      rgba(191, 0, 255, 0.2) 0%, 
+      rgba(255, 0, 128, 0.15) 50%,
+      rgba(191, 0, 255, 0.2) 100%),
+    linear-gradient(135deg, 
+      rgba(26, 26, 46, 0.98) 0%, 
+      rgba(42, 42, 78, 0.95) 100%);
+  animation: 
+    nodeSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rootGlow 3s ease-in-out infinite;
+}
+
+@keyframes rootGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 40px rgba(191, 0, 255, 0.4),
+      0 0 80px rgba(191, 0, 255, 0.2),
+      0 0 120px rgba(255, 0, 128, 0.1),
+      inset 0 0 40px rgba(191, 0, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 60px rgba(191, 0, 255, 0.6),
+      0 0 120px rgba(191, 0, 255, 0.3),
+      0 0 180px rgba(255, 0, 128, 0.15),
+      inset 0 0 60px rgba(191, 0, 255, 0.15);
+  }
+}
+
+.root-node::before {
+  background: linear-gradient(90deg, 
+    var(--cyber-purple),
+    var(--cyber-pink),
+    var(--cyber-purple),
+    var(--cyber-pink));
+  animation: borderScan 2s linear infinite;
+}
+
+/* ========================================
+   节点内容样式
+   ======================================== */
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.node-grade {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--cyber-green), var(--cyber-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  animation: gradeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes gradeGlow {
+  0% { filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5)); }
+  100% { filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.8)); }
+}
+
+.node-type {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--cyber-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.node-description {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.node-scores {
+  display: flex;
+  gap: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+}
+
+.node-scores span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.node-scores span:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  transform: translateY(-2px);
+}
+
+.node-scores span[title="阻力"] { color: var(--cyber-red); }
+.node-scores span[title="耦合"] { color: var(--cyber-yellow); }
+.node-scores span[title="维护"] { color: var(--cyber-cyan); }
+
+.node-score {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cyber-yellow);
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.node-controllability {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--cyber-cyan);
+  padding: 4px 0;
+}
+
+.node-highlight {
+  font-family: 'Orbitron', monospace;
+  background: 
+    linear-gradient(90deg, 
+      rgba(0, 255, 136, 0.25), 
+      rgba(0, 240, 255, 0.25));
+  color: var(--cyber-green);
+  font-size: 0.7rem;
+  padding: 8px 14px;
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.2),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+  animation: highlightPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 255, 136, 0.2),
+      inset 0 0 20px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(0, 255, 136, 0.4),
+      inset 0 0 30px rgba(0, 255, 136, 0.15);
+  }
+}
+
+/* ========================================
+   路径高亮效果
+   ======================================== */
+
+.policy-node.in-path {
+  animation: 
+    nodeSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    pathGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes pathGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 0.4),
+      0 0 60px rgba(0, 255, 136, 0.2),
+      0 0 90px rgba(0, 240, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(0, 255, 136, 0.6),
+      0 0 100px rgba(0, 255, 136, 0.3),
+      0 0 150px rgba(0, 240, 255, 0.15);
+  }
+}
+
+.policy-node.in-path::before {
+  background: linear-gradient(90deg, 
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-green));
+  animation: borderScan 0.8s linear infinite;
+}
+
+/* ========================================
+   ReactFlow 控件样式
+   ======================================== */
+
+.react-flow__controls {
+  background: 
+    linear-gradient(135deg, 
+      rgba(10, 10, 15, 0.98) 0%, 
+      rgba(26, 26, 46, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  padding: 10px;
+}
+
+.react-flow__controls-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(0, 255, 136, 0.15), 
+    rgba(0, 240, 255, 0.1));
+  color: var(--cyber-green);
+  box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+
+.react-flow__minimap {
+  background: 
+    linear-gradient(135deg, 
+      rgba(10, 10, 15, 0.98) 0%, 
+      rgba(26, 26, 46, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.react-flow__attribution {
+  background: rgba(10, 10, 15, 0.9);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.6rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* ========================================
+   边线样式 - 数据流动效果
+   ======================================== */
+
+.react-flow__edge-path {
+  stroke: var(--cyber-green);
+  stroke-width: 2;
+  stroke-dasharray: 8, 4;
+  animation: dataFlow 2s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.6));
+}
+
+@keyframes dataFlow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -24; }
+}
+
+/* 高亮边线 */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: var(--cyber-cyan);
+  stroke-width: 3;
+  stroke-dasharray: 12, 6;
+  animation: dataFlowHighlight 0.8s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.8));
+}
+
+@keyframes dataFlowHighlight {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -36; }
+}
+
+/* ========================================
+   响应式调整
+   ======================================== */
+
+@media (max-width: 768px) {
+  .policy-node,
+  .intervention-node,
+  .root-node {
+    min-width: 160px;
+    max-width: 200px;
+    padding: 12px 14px;
+  }
+  
+  .node-grade {
+    font-size: 1.2rem;
+  }
+  
+  .node-description {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   减少动画偏好支持
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .policy-node,
+  .intervention-node,
+  .root-node {
+    animation: none;
+  }
+  
+  .policy-node::before,
+  .intervention-node::before,
+  .root-node::before {
+    animation: none;
+  }
+  
+  .react-flow__edge-path {
+    animation: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 17:30
+   编辑人: Frontend Design Skill
+   ======================================== */

@@ -1,0 +1,438 @@
+/* ========================================
+   CyberDashboard - 赛博朋克仪表盘样式
+   ======================================== */
+
+/* 导入字体 */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap');
+
+/* CSS变量 */
+.cyber-dashboard {
+  --cyber-green: #00ff88;
+  --cyber-cyan: #00f0ff;
+  --cyber-purple: #bf00ff;
+  --cyber-pink: #ff0080;
+  --cyber-yellow: #ffcc00;
+  --cyber-red: #ff0040;
+  --cyber-dark: #0a0a0f;
+  --cyber-darker: #050508;
+  
+  position: relative;
+  padding: 20px;
+  background: 
+    linear-gradient(135deg, 
+      rgba(10, 10, 15, 0.98) 0%, 
+      rgba(20, 20, 35, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* 背景网格效果 */
+.cyber-dashboard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+/* ========================================
+   仪表盘头部
+   ======================================== */
+
+.dashboard-header {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.dashboard-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--cyber-green);
+  text-align: center;
+  margin: 0 0 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.title-icon {
+  font-size: 0.8rem;
+  animation: iconBlink 1.5s ease-in-out infinite;
+}
+
+@keyframes iconBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.header-line {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent,
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-green),
+    transparent);
+  animation: lineGlow 3s ease-in-out infinite;
+}
+
+@keyframes lineGlow {
+  0%, 100% { 
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+  }
+  50% { 
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+  }
+}
+
+/* ========================================
+   指标卡片网格
+   ======================================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  position: relative;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* 卡片发光效果 */
+.metric-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    var(--cyber-green),
+    transparent);
+  animation: glowScan 2s linear infinite;
+}
+
+@keyframes glowScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 不同类型卡片的颜色 */
+.metric-card.primary .metric-glow { background: linear-gradient(90deg, transparent, var(--cyber-green), transparent); }
+.metric-card.success .metric-glow { background: linear-gradient(90deg, transparent, var(--cyber-cyan), transparent); }
+.metric-card.warning .metric-glow { background: linear-gradient(90deg, transparent, var(--cyber-yellow), transparent); }
+.metric-card.info .metric-glow { background: linear-gradient(90deg, transparent, var(--cyber-purple), transparent); }
+
+.metric-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.metric-card.primary .metric-icon { color: var(--cyber-green); }
+.metric-card.success .metric-icon { color: var(--cyber-cyan); }
+.metric-card.warning .metric-icon { color: var(--cyber-yellow); }
+.metric-card.info .metric-icon { color: var(--cyber-purple); }
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.metric-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* 进度条 */
+.metric-bar {
+  margin-top: 10px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyber-green), var(--cyber-cyan));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  animation: barPulse 2s ease-in-out infinite;
+}
+
+@keyframes barPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ========================================
+   等级分布区域
+   ======================================== */
+
+.grade-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--cyber-cyan);
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.title-decorator {
+  color: rgba(0, 240, 255, 0.5);
+  margin: 0 8px;
+}
+
+.grade-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grade-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grade-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 30px;
+  color: var(--cyber-green);
+}
+
+.grade-bar-container {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.grade-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(0, 255, 136, 0.3),
+    rgba(0, 240, 255, 0.3));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.grade-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  width: 30px;
+  text-align: right;
+}
+
+/* ========================================
+   系统状态区域
+   ======================================== */
+
+.system-status {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  border-radius: 4px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyber-green);
+  box-shadow: 0 0 10px var(--cyber-green);
+}
+
+.status-indicator.active {
+  animation: statusBlink 1s ease-in-out infinite;
+}
+
+.status-indicator.pulse {
+  animation: statusPulse 0.5s ease-in-out infinite;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 10px var(--cyber-yellow);
+}
+
+@keyframes statusBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes statusPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.status-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+/* ========================================
+   装饰性角落
+   ======================================== */
+
+.dashboard-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cyber-green);
+  opacity: 0.3;
+}
+
+.corner.top-left {
+  top: 5px;
+  left: 5px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner.top-right {
+  top: 5px;
+  right: 5px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner.bottom-left {
+  bottom: 5px;
+  left: 5px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner.bottom-right {
+  bottom: 5px;
+  right: 5px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+@media (max-width: 768px) {
+  .cyber-dashboard {
+    padding: 15px;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .system-status {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .title-icon,
+  .header-line,
+  .metric-glow,
+  .metric-icon,
+  .bar-fill,
+  .status-indicator {
+    animation: none;
+  }
+  
+  .metric-card:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 18:10
+   编辑人: Frontend Design Skill
+   ======================================== */

@@ -1,0 +1,116 @@
+# 健康改善模板
+# 适用于：想要改善身体状况、养成健康生活习惯的人
+
+policies:
+  # ===== 睡眠相关 =====
+  - name: "早睡"
+    description: "每晚11点前入睡"
+    impact:
+      health: 0.4
+      energy: 0.5
+      focus: 0.2
+    cost: 1.0
+
+  - name: "早起"
+    description: "每天早上6-7点起床"
+    impact:
+      health: 0.3
+      productivity: 0.2
+      energy: 0.3
+    cost: 1.0
+    dependencies:
+      - "早睡"
+
+  # ===== 运动相关 =====
+  - name: "晨跑"
+    description: "每周晨跑3次，每次30分钟"
+    impact:
+      health: 0.5
+      energy: 0.4
+      happiness: 0.2
+    cost: 2.0
+    dependencies:
+      - "早起"
+
+  - name: "力量训练"
+    description: "每周力量训练2次，每次45分钟"
+    impact:
+      health: 0.4
+      energy: 0.3
+    cost: 2.5
+
+  - name: "拉伸"
+    description: "每天睡前拉伸10分钟"
+    impact:
+      health: 0.2
+      stress: -0.2
+    cost: 0.5
+
+  # ===== 饮食相关 =====
+  - name: "健康早餐"
+    description: "每天吃营养均衡的早餐"
+    impact:
+      health: 0.3
+      energy: 0.3
+    cost: 1.0
+    dependencies:
+      - "早起"
+
+  - name: "少糖饮食"
+    description: "减少糖分摄入，戒掉甜食"
+    impact:
+      health: 0.4
+      energy: 0.2
+    cost: 1.5
+
+  - name: "多喝水"
+    description: "每天喝8杯水（约2升）"
+    impact:
+      health: 0.3
+      energy: 0.2
+    cost: 0.5
+
+  - name: "戒夜宵"
+    description: "晚上8点后不再进食"
+    impact:
+      health: 0.3
+    cost: 1.0
+    conflicts:
+      - "熬夜"
+
+  # ===== 生活习惯 =====
+  - name: "定期体检"
+    description: "每年进行一次全面体检"
+    impact:
+      health: 0.2
+      security: 0.3
+    cost: 1.0
+
+  - name: "戒熬夜"
+    description: "不再熬夜到凌晨"
+    impact:
+      health: 0.5
+      energy: 0.4
+      stress: -0.3
+    cost: 2.0
+
+# 初始状态（根据实际情况调整）
+initial_state:
+  health: 4.0        # 健康状况较差
+  happiness: 5.0     # 幸福感一般
+  energy: 4.0        # 精力不足
+  focus: 5.0         # 专注力一般
+  stress: 6.0        # 压力偏高
+  productivity: 5.0  # 生产力一般
+
+# 目标状态
+target_state:
+  health: 8.0        # 健康良好
+  happiness: 7.0     # 幸福感提升
+  energy: 7.5        # 精力充沛
+  focus: 7.0         # 专注力提升
+  stress: 4.0        # 压力降低
+  productivity: 7.0  # 生产力提升
+
+# 最后更新时间: 2026-02-21 20:00
+# 编辑人: Trae AI

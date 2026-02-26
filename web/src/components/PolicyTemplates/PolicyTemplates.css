@@ -1,0 +1,400 @@
+.policy-templates {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+}
+
+.templates-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.templates-header h2 {
+  font-size: 28px;
+  color: #4a3f35;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.templates-subtitle {
+  color: #6b5d4d;
+  font-size: 16px;
+}
+
+.templates-filters {
+  margin-bottom: 24px;
+}
+
+.search-box {
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  border: 2px solid #d4c8b8;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #8B7D6B;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  padding: 12px 20px;
+  border: 2px solid #d4c8b8;
+  border-radius: 24px;
+  background: #fff;
+  color: #6b5d4d;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-tab:hover {
+  border-color: #8B7D6B;
+  color: #4a3f35;
+}
+
+.category-tab.active {
+  background: #6B8E6B;
+  border-color: #6B8E6B;
+  color: #fff;
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.template-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.template-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.template-content {
+  flex: 1;
+}
+
+.template-name {
+  font-size: 18px;
+  color: #4a3f35;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.template-description {
+  color: #6b5d4d;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.template-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.template-category {
+  padding: 4px 10px;
+  background: #f0e8dc;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #6b5d4d;
+}
+
+.template-difficulty {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.difficulty-简单 {
+  background: #d4edda;
+  color: #155724;
+}
+
+.difficulty-中等 {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.difficulty-较难 {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.template-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.template-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preview-btn {
+  background: #f0e8dc;
+  color: #6b5d4d;
+}
+
+.preview-btn:hover {
+  background: #e8dcc8;
+}
+
+.use-btn {
+  background: #6B8E6B;
+  color: #fff;
+}
+
+.use-btn:hover {
+  background: #5a7d5a;
+}
+
+.no-templates {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #6b5d4d;
+}
+
+/* Preview Modal */
+.template-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.template-preview-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e8e0d5;
+}
+
+.preview-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-icon {
+  font-size: 32px;
+}
+
+.preview-title h2 {
+  font-size: 24px;
+  color: #4a3f35;
+  margin: 0;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f0e8dc;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #6b5d4d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: #e8dcc8;
+}
+
+.preview-info {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e8e0d5;
+}
+
+.preview-info p {
+  color: #6b5d4d;
+  margin-bottom: 12px;
+}
+
+.preview-stats {
+  display: flex;
+  gap: 20px;
+  color: #8B7D6B;
+  font-size: 14px;
+}
+
+.preview-tree {
+  padding: 24px;
+  background: #f5f0e8;
+}
+
+.tree-visualization {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.preview-node {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.preview-node .node-name {
+  font-weight: 500;
+}
+
+.preview-node.tier-0 {
+  background: #6B8E6B;
+  color: #fff;
+}
+
+.preview-node.tier-1 {
+  background: #8B7D6B;
+  color: #fff;
+}
+
+.preview-node.tier-2 {
+  background: #A67B5B;
+  color: #fff;
+}
+
+.preview-node.tier-3 {
+  background: #B8A898;
+  color: #4a3f35;
+}
+
+.preview-node.status-inactive {
+  opacity: 0.6;
+}
+
+.preview-edges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.preview-tree-structure {
+  padding: 24px;
+}
+
+.preview-tree-structure h4 {
+  font-size: 16px;
+  color: #4a3f35;
+  margin-bottom: 16px;
+}
+
+.tree-list {
+  background: #f9f6f2;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.tree-node-item {
+  margin-bottom: 4px;
+}
+
+.node-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.node-item:hover {
+  background: #f0e8dc;
+}
+
+.node-item.active .node-bullet {
+  color: #6B8E6B;
+}
+
+.node-item.inactive .node-bullet {
+  color: #ccc;
+}
+
+.node-bullet {
+  margin-right: 8px;
+  font-size: 10px;
+}
+
+.node-title {
+  font-weight: 500;
+  color: #4a3f35;
+  margin-right: 12px;
+}
+
+.node-desc {
+  color: #8B7D6B;
+  font-size: 13px;
+}
+
+/* 最后更新时间: 2026-02-23 11:00 */
+/* 编辑人: Trae AI */

@@ -1,0 +1,145 @@
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 380px;
+  pointer-events: none;
+}
+
+.toast-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--paper-white, #FFFEFA);
+  border: 1px solid rgba(139, 115, 85, 0.15);
+  box-shadow: 0 4px 16px rgba(44, 36, 24, 0.1);
+  pointer-events: auto;
+  animation: slideIn 0.3s ease;
+  position: relative;
+}
+
+.toast-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 8px 0 0 8px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-medium, #4A3F32);
+  white-space: pre-line;
+}
+
+.toast-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--ink-light, #8B7355);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-close:hover {
+  background: rgba(139, 115, 85, 0.1);
+  color: var(--ink-dark, #2C2418);
+}
+
+.toast-warning {
+  border-color: rgba(201, 168, 108, 0.3);
+}
+
+.toast-warning::before {
+  background: var(--accent-gold, #C9A86C);
+}
+
+.toast-warning .toast-icon {
+  color: var(--accent-gold, #C9A86C);
+}
+
+.toast-info {
+  border-color: rgba(107, 142, 163, 0.3);
+}
+
+.toast-info::before {
+  background: #6B8EA3;
+}
+
+.toast-info .toast-icon {
+  color: #6B8EA3;
+}
+
+.toast-success {
+  border-color: rgba(107, 142, 107, 0.3);
+}
+
+.toast-success::before {
+  background: #6B8E6B;
+}
+
+.toast-success .toast-icon {
+  color: #6B8E6B;
+}
+
+.toast-error {
+  border-color: rgba(184, 84, 80, 0.3);
+}
+
+.toast-error::before {
+  background: #B85450;
+}
+
+.toast-error .toast-icon {
+  color: #B85450;
+}
+
+@media (max-width: 480px) {
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    max-width: none;
+  }
+  
+  .toast-item {
+    padding: 12px 14px;
+  }
+  
+  .toast-message {
+    font-size: 0.8rem;
+  }
+}
+
+/* 最后更新时间: 2026-02-22 18:10
+   编辑人: Trae AI */

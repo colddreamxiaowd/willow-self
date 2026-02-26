@@ -1,0 +1,339 @@
+/* OnboardingGuide.css - 温暖书籍风格 */
+/* 与 BookTheme 保持一致的设计理念 */
+
+/* ========== 遮罩层 ========== */
+.onboarding-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 22, 18, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== 弹窗容器 ========== */
+.onboarding-modal {
+  background: #FFFEFA;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 20px 60px rgba(26, 22, 18, 0.15),
+    0 0 0 1px rgba(139, 115, 85, 0.1);
+  animation: modal-enter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ========== 头部 ========== */
+.onboarding-header {
+  padding: 20px 24px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.onboarding-skip {
+  background: none;
+  border: none;
+  color: #9A8B7A;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.onboarding-skip:hover {
+  color: #6B5D4D;
+  background: #F5F0E8;
+}
+
+/* ========== 内容区 ========== */
+.onboarding-body {
+  flex: 1;
+  padding: 0 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+}
+
+.step-icon {
+  font-size: 56px;
+  margin-bottom: 16px;
+  animation: icon-float 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.step-title {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2C2418;
+  margin: 0 0 24px 0;
+  letter-spacing: 0.5px;
+}
+
+.step-content-wrapper {
+  width: 100%;
+}
+
+/* ========== 步骤内容样式 ========== */
+.onboarding-step-content {
+  color: #4A3F32;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.step-intro {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+}
+
+.step-intro strong {
+  color: #2C2418;
+  font-weight: 600;
+}
+
+/* 特性列表 */
+.step-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #FDF8F3;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid #F5F0E8;
+}
+
+.feature-icon {
+  font-size: 20px;
+}
+
+/* 概念卡片 */
+.concept-card {
+  background: #F8F4EE;
+  border-left: 3px solid #8B7355;
+  padding: 16px 20px;
+  margin: 20px 0;
+  border-radius: 0 10px 10px 0;
+  text-align: left;
+}
+
+.concept-card.highlight {
+  background: #FDF8F3;
+  border-left-color: #C9A86C;
+}
+
+.concept-card p {
+  margin: 0 0 8px 0;
+}
+
+.concept-card p:last-child {
+  margin-bottom: 0;
+}
+
+.concept-key {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2C2418;
+}
+
+.concept-example {
+  color: #6B5D4D;
+  font-size: 14px;
+}
+
+.step-conclusion {
+  margin: 20px 0 0 0;
+  color: #6B5D4D;
+}
+
+.step-conclusion.highlight {
+  color: #8B7355;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* 示例列表 */
+.example-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.example-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #FFFEFA;
+  border: 1px solid #E8E0D0;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.example-icon {
+  font-size: 18px;
+}
+
+/* 提示列表 */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.tip-item {
+  padding: 10px 16px;
+  background: #F5F0E8;
+  border-radius: 8px;
+  color: #4A3F32;
+}
+
+/* ========== 底部 ========== */
+.onboarding-footer {
+  padding: 24px 40px 32px;
+  border-top: 1px solid #F5F0E8;
+  background: #FDF8F3;
+}
+
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D4C4A8;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  background: #8B7355;
+  transform: scale(1.2);
+}
+
+.progress-dot.completed {
+  background: #C9A86C;
+}
+
+/* ========== 按钮 ========== */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-placeholder {
+  width: 88px;
+}
+
+.btn-primary {
+  flex: 1;
+  max-width: 200px;
+  padding: 12px 24px;
+  background: #8B7355;
+  color: #FFFEFA;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.btn-primary:hover {
+  background: #6D5A42;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+}
+
+.btn-secondary {
+  padding: 12px 20px;
+  background: transparent;
+  color: #6B5D4D;
+  border: 1px solid #D4C4A8;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.btn-secondary:hover {
+  background: #F5F0E8;
+  border-color: #8B7355;
+  color: #4A3F32;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 600px) {
+  .onboarding-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .onboarding-body {
+    padding: 0 24px 24px;
+  }
+  
+  .onboarding-footer {
+    padding: 20px 24px 24px;
+  }
+  
+  .step-title {
+    font-size: 20px;
+  }
+  
+  .step-icon {
+    font-size: 48px;
+  }
+}

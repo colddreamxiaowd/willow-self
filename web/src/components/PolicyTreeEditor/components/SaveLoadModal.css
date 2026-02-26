@@ -1,0 +1,201 @@
+/* web/src/components/PolicyTreeEditor/components/SaveLoadModal.css */
+
+.save-load-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+.save-load-modal {
+  background: #f5f5f0; /* 暖白纸质感 */
+  width: 700px;
+  max-width: 95vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  border: 1px solid #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 2px solid #6B8E6B; /* 莫兰迪绿边框 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #4a5d4a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.close-btn {
+  background: #f0f0e8;
+  border: none;
+  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #e0e0d5;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.modal-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.save-slot {
+  background: #fff;
+  border: 1px solid #e0e0d5;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.save-slot:hover {
+  border-color: #6B8E6B;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.slot-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slot-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.slot-empty {
+  color: #999;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.slot-meta {
+  font-size: 0.8rem;
+  color: #888;
+  display: flex;
+  gap: 12px;
+}
+
+.slot-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.slot-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.btn-save {
+  background: #6B8E6B;
+  color: #fff;
+}
+
+.btn-save:hover {
+  background: #5a7a5a;
+}
+
+.btn-load {
+  background: #f0f4f0;
+  color: #6B8E6B;
+  border-color: #6B8E6B;
+}
+
+.btn-load:hover {
+  background: #e1ede1;
+}
+
+.btn-delete {
+  background: #fff;
+  color: #999;
+  border-color: #e5e7eb;
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+/* 重命名输入框样式 */
+.rename-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.rename-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #6B8E6B;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  background: #fff;
+}
+
+.btn-confirm {
+  background: #6B8E6B;
+  color: #fff;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #666;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0);/* 适配移动端 */

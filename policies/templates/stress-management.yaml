@@ -1,0 +1,135 @@
+# 压力管理模板
+# 适用于：压力大、焦虑、需要放松身心的人
+
+policies:
+  # ===== 放松技巧 =====
+  - name: "冥想"
+    description: "每天冥想10-15分钟"
+    impact:
+      stress: -0.5
+      happiness: 0.3
+      focus: 0.3
+    cost: 0.5
+
+  - name: "深呼吸"
+    description: "每天进行3次深呼吸练习，每次5分钟"
+    impact:
+      stress: -0.4
+      energy: 0.2
+    cost: 0.5
+
+  - name: "瑜伽"
+    description: "每周练习瑜伽2次，每次45分钟"
+    impact:
+      stress: -0.4
+      health: 0.3
+      happiness: 0.3
+    cost: 2.0
+
+  # ===== 运动减压 =====
+  - name: "散步"
+    description: "每天散步30分钟"
+    impact:
+      stress: -0.3
+      health: 0.2
+      happiness: 0.2
+    cost: 1.0
+
+  - name: "跑步"
+    description: "每周跑步2次，每次30分钟"
+    impact:
+      stress: -0.4
+      health: 0.4
+      energy: 0.3
+    cost: 2.0
+
+  # ===== 社交支持 =====
+  - name: "社交"
+    description: "每周与朋友聚会一次"
+    impact:
+      happiness: 0.4
+      stress: -0.3
+      relationships: 0.4
+    cost: 1.5
+
+  - name: "倾诉"
+    description: "定期与信任的人倾诉烦恼"
+    impact:
+      stress: -0.3
+      happiness: 0.2
+      relationships: 0.3
+    cost: 0.5
+
+  # ===== 爱好放松 =====
+  - name: "阅读"
+    description: "每天阅读30分钟（非工作相关）"
+    impact:
+      stress: -0.3
+      happiness: 0.3
+      growth: 0.2
+    cost: 0.5
+
+  - name: "听音乐"
+    description: "每天听放松音乐20分钟"
+    impact:
+      stress: -0.3
+      happiness: 0.2
+    cost: 0.5
+
+  - name: "爱好时间"
+    description: "每周花2小时做自己喜欢的事"
+    impact:
+      happiness: 0.4
+      stress: -0.2
+    cost: 1.0
+
+  # ===== 睡眠改善 =====
+  - name: "早睡"
+    description: "每晚11点前入睡"
+    impact:
+      stress: -0.3
+      health: 0.3
+      energy: 0.4
+    cost: 1.0
+
+  - name: "睡前放松"
+    description: "睡前30分钟不看电子屏幕"
+    impact:
+      stress: -0.2
+      health: 0.2
+    cost: 0.5
+
+  # ===== 防御型国策 =====
+  - name: "戒咖啡"
+    description: "减少咖啡因摄入"
+    impact:
+      stress: -0.3
+      health: 0.2
+    cost: 1.0
+
+  - name: "戒熬夜"
+    description: "不再熬夜"
+    impact:
+      stress: -0.4
+      health: 0.4
+      energy: 0.3
+    cost: 2.0
+
+# 初始状态
+initial_state:
+  stress: 8.0         # 压力很大
+  happiness: 4.0      # 幸福感低
+  health: 5.0         # 健康一般
+  energy: 4.0         # 精力不足
+  relationships: 5.0  # 人际关系一般
+
+# 目标状态
+target_state:
+  stress: 4.0         # 压力降低到可控范围
+  happiness: 7.0      # 幸福感提升
+  health: 7.0         # 健康改善
+  energy: 7.0         # 精力恢复
+  relationships: 7.0  # 人际关系改善
+
+# 最后更新时间: 2026-02-21 20:00
+# 编辑人: Trae AI

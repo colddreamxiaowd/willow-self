@@ -1,0 +1,985 @@
+/* ========================================
+   App.css - 赛博朋克全局样式 v3.0
+   大胆的非对称布局设计
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --cyber-green: #00ff88;
+  --cyber-cyan: #00f0ff;
+  --cyber-purple: #bf00ff;
+  --cyber-pink: #ff0080;
+  --cyber-yellow: #ffcc00;
+  --cyber-red: #ff0040;
+  --cyber-dark: #0a0a0f;
+  --cyber-darker: #050508;
+  --cyber-gray: #1a1a2e;
+  --cyber-light: #2a2a4e;
+  --sidebar-width: 380px;
+  --header-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, 
+    rgba(0, 255, 136, 0.5), 
+    rgba(0, 240, 255, 0.5));
+  border-radius: 3px;
+}
+
+::selection {
+  background: rgba(0, 255, 136, 0.4);
+  color: #fff;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--cyber-darker);
+  min-height: 100vh;
+  color: rgba(255, 255, 255, 0.9);
+  overflow-x: hidden;
+}
+
+/* 动态背景层 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, rgba(0, 255, 136, 0.015) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 136, 0.015) 1px, transparent 1px),
+    radial-gradient(ellipse at 0% 0%, rgba(0, 255, 136, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(191, 0, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+  background-size: 
+    50px 50px,
+    50px 50px,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ========================================
+   头部 - 紧凑型设计
+   ======================================== */
+
+.header {
+  height: var(--header-height);
+  background: rgba(5, 5, 8, 0.95);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-purple),
+    transparent);
+  background-size: 300% 100%;
+  animation: headerScan 6s linear infinite;
+}
+
+@keyframes headerScan {
+  0% { background-position: 300% 0; }
+  100% { background-position: -300% 0; }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  color: var(--cyber-green);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.7));
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+.header h1 {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, 
+    var(--cyber-green) 0%, 
+    var(--cyber-cyan) 50%, 
+    var(--cyber-purple) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleShimmer 4s linear infinite;
+}
+
+@keyframes titleShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.version {
+  font-family: 'Share Tech Mono', monospace;
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--cyber-green);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.header-right {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.help-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: transparent;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  color: rgba(0, 255, 136, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.help-btn:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--cyber-green);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   主布局 - 非对称分栏
+   ======================================== */
+
+.main-content {
+  flex: 1;
+  margin-top: var(--header-height);
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* 左侧边栏 - 固定宽度 */
+.left-sidebar {
+  width: var(--sidebar-width);
+  background: 
+    linear-gradient(180deg, 
+      rgba(5, 5, 8, 0.98) 0%, 
+      rgba(10, 10, 18, 0.95) 100%);
+  border-right: 1px solid rgba(0, 255, 136, 0.15);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 侧边栏装饰线 */
+.left-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    transparent,
+    var(--cyber-green),
+    var(--cyber-cyan),
+    var(--cyber-purple),
+    transparent);
+  opacity: 0.5;
+}
+
+/* 侧边栏标签 */
+.sidebar-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--cyber-cyan);
+  padding: 1rem 1.5rem 0.5rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-cyan);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: labelPulse 2s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 编辑器区域 */
+.editor-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+/* 操作按钮区 */
+.action-section {
+  padding: 1rem 1rem 1.5rem;
+  border-top: 1px solid rgba(0, 255, 136, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.7rem 1rem;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyber-green), var(--cyber-cyan));
+  color: var(--cyber-darker);
+  font-weight: 700;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(0, 255, 136, 0.4),
+    0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--cyber-cyan);
+  border: 1px solid var(--cyber-cyan);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   右侧主区域 - 可视化
+   ======================================== */
+
+.right-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 标签导航 - 移到右侧顶部 */
+.tabs-nav {
+  display: flex;
+  background: rgba(5, 5, 8, 0.9);
+  padding: 0.5rem 1.5rem;
+  gap: 0.25rem;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0.6rem 1.2rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--cyber-green);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.tab:hover {
+  background: rgba(0, 255, 136, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tab.active {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--cyber-green);
+}
+
+.tab.active::after {
+  width: 60%;
+}
+
+/* 可视化区域 */
+.visualization-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-grid {
+  display: contents;
+}
+
+.right-panel {
+  height: 100%;
+  background: 
+    linear-gradient(135deg, 
+      rgba(5, 5, 8, 0.95) 0%, 
+      rgba(10, 10, 18, 0.9) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.12);
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 角落装饰 */
+.right-panel::before,
+.right-panel::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(0, 255, 136, 0.25);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.right-panel::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.right-panel::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ========================================
+   帮助面板 - 侧边滑出
+   ======================================== */
+
+.help-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, 
+      rgba(5, 5, 8, 0.99) 0%, 
+      rgba(15, 15, 25, 0.98) 100%);
+  border-left: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 1.5rem;
+  z-index: 100;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.help-panel h3 {
+  font-family: 'Orbitron', monospace;
+  color: var(--cyber-green);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.help-panel h4 {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyber-cyan);
+  font-size: 0.75rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.help-panel ul {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.help-panel li {
+  padding: 0.4rem 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.05);
+}
+
+.help-panel li::before {
+  content: '▸ ';
+  color: var(--cyber-green);
+}
+
+.help-panel code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  padding: 0.8rem;
+  border-radius: 3px;
+  display: block;
+  font-size: 0.7rem;
+  color: var(--cyber-yellow);
+  overflow-x: auto;
+}
+
+/* ========================================
+   错误横幅
+   ======================================== */
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 64, 0.15), 
+    rgba(255, 0, 64, 0.08));
+  border-left: 3px solid var(--cyber-red);
+  color: #ff6b8a;
+  padding: 0.8rem 1rem;
+  font-size: 0.75rem;
+  animation: errorSlide 0.3s ease;
+}
+
+@keyframes errorSlide {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ========================================
+   空状态
+   ======================================== */
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 3rem;
+}
+
+.empty-icon {
+  opacity: 0.15;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.3));
+  animation: emptyFloat 4s ease-in-out infinite;
+}
+
+@keyframes emptyFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.empty-state h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.empty-state p {
+  text-align: center;
+  max-width: 280px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ========================================
+   页脚 - 极简设计
+   ======================================== */
+
+.footer {
+  font-family: 'Share Tech Mono', monospace;
+  background: rgba(5, 5, 8, 0.95);
+  border-top: 1px solid rgba(0, 255, 136, 0.1);
+  padding: 0.6rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.footer-note {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.55rem;
+}
+
+/* ========================================
+   免责声明页面 - 温暖极简风格
+   设计理念：像阅读一本私人笔记，温暖而有深度
+   ======================================== */
+
+.disclaimer-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #FFFEFA;
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+}
+
+.disclaimer-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(201, 168, 108, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(201, 168, 108, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.disclaimer-content {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: #FFFEFA;
+  border: 1px solid rgba(139, 115, 85, 0.12);
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 
+    0 4px 24px rgba(44, 36, 24, 0.06),
+    0 1px 3px rgba(44, 36, 24, 0.04);
+  position: relative;
+  z-index: 1;
+}
+
+.disclaimer-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #C9A86C;
+  border-radius: 0 0 3px 3px;
+}
+
+.warning-icon {
+  color: #C9A86C;
+  margin-bottom: 1.25rem;
+  opacity: 0.85;
+}
+
+.disclaimer-content h2 {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  color: #2C2418;
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.disclaimer-content pre {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: #FDF8F3;
+  border: 1px solid rgba(139, 115, 85, 0.1);
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+  white-space: pre-wrap;
+  color: #4A3F32;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-size: 0.9rem;
+}
+
+.disclaimer-content pre::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 108, 0.3), transparent);
+  margin-bottom: 1rem;
+}
+
+.accept-btn {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: #C9A86C;
+  color: white;
+  border: none;
+  padding: 0.875rem 2.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(201, 168, 108, 0.25);
+}
+
+.accept-btn:hover {
+  background: #8B7355;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(139, 115, 85, 0.3);
+}
+
+.accept-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+@media (max-width: 1200px) {
+  :root {
+    --sidebar-width: 340px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 100%;
+    --header-height: 60px;
+  }
+  
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .left-sidebar {
+    width: 100%;
+    max-height: 45vh;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+  }
+  
+  .left-sidebar::before {
+    display: none;
+  }
+  
+  .editor-section {
+    flex: 1;
+  }
+  
+  .action-section {
+    padding: 0.8rem;
+  }
+  
+  .action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .right-main {
+    min-height: 55vh;
+  }
+  
+  .help-panel {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .header-right {
+    gap: 0.5rem;
+  }
+  
+  .help-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+  }
+  
+  .help-btn span {
+    display: none;
+  }
+  
+  .tabs-nav {
+    padding: 0.5rem 1rem;
+    overflow-x: auto;
+  }
+  
+  .tab {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+  
+  .sidebar-label {
+    font-size: 0.6rem;
+    padding: 0.8rem 1rem 0.4rem;
+  }
+  
+  .footer {
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.8rem 1rem;
+  }
+  
+  .disclaimer-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   模式选择器
+   ======================================== */
+.mode-selector {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+  background: rgba(0, 255, 136, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-btn.active {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  color: var(--cyber-green, #00ff88);
+}
+
+/* ========================================
+   场景选择器弹窗
+   ======================================== */
+.scene-selector-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.scene-selector-modal {
+  background: linear-gradient(135deg, 
+    rgba(5, 5, 8, 0.98) 0%, 
+    rgba(15, 15, 25, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 16px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(0, 255, 136, 0.1);
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 18:50
+   编辑人: Trae AI
+   版本: v3.1 - 添加模式选择器和场景弹窗样式
+   ======================================== */

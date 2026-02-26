@@ -1,0 +1,408 @@
+/* FieldHelp.css - 字段帮助提示组件样式 */
+/* 设计理念：友好、易懂、不突兀 */
+
+/* ========================================
+   帮助预览（折叠状态）
+   ======================================== */
+.field-help {
+  margin: 0.75rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.help-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 240, 255, 0.05);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 10px;
+}
+
+.preview-icon {
+  color: var(--cyber-cyan, #00f0ff);
+  flex-shrink: 0;
+}
+
+.preview-text {
+  flex: 1;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.expand-btn {
+  font-family: 'Rajdhani', sans-serif;
+  background: transparent;
+  border: none;
+  color: var(--cyber-cyan, #00f0ff);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.expand-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+}
+
+/* ========================================
+   详细帮助（展开状态）
+   ======================================== */
+.help-detailed {
+  background: linear-gradient(135deg, 
+    rgba(5, 5, 8, 0.98) 0%, 
+    rgba(15, 15, 25, 0.95) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.help-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cyber-cyan, #00f0ff);
+  margin: 0;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.help-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.help-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* ========================================
+   举例说明
+   ======================================== */
+.help-example {
+  background: rgba(0, 255, 136, 0.05);
+  border-left: 3px solid var(--cyber-green, #00ff88);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.example-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cyber-green, #00ff88);
+  margin-right: 0.5rem;
+}
+
+.example-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   小贴士
+   ======================================== */
+.help-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(255, 204, 0, 0.08);
+  border: 1px solid rgba(255, 204, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.help-tip svg {
+  color: var(--cyber-yellow, #ffcc00);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.help-tip span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   评分参考
+   ======================================== */
+.help-scale h5 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 0.5rem;
+}
+
+.scale-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.scale-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.scale-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cyber-green, #00ff88);
+  width: 24px;
+  text-align: center;
+}
+
+.scale-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.scale-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.scale-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   类型说明
+   ======================================== */
+.help-types {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.type-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.type-emoji {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.type-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.type-desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* ========================================
+   等级说明
+   ======================================== */
+.help-grades {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.grade-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--grade-color, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+}
+
+.grade-emoji {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.grade-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.grade-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--grade-color, rgba(255, 255, 255, 0.9));
+}
+
+.grade-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.125rem;
+}
+
+.grade-criteria {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 0.25rem;
+}
+
+/* ========================================
+   收起按钮
+   ======================================== */
+.collapse-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collapse-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   快速帮助提示
+   ======================================== */
+.help-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip-icon {
+  color: rgba(255, 255, 255, 0.4);
+  cursor: help;
+  transition: color 0.3s ease;
+}
+
+.tooltip-icon:hover {
+  color: var(--cyber-cyan, #00f0ff);
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5, 5, 8, 0.98);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+  margin-bottom: 8px;
+}
+
+.help-tooltip:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   快速帮助（内联）
+   ======================================== */
+.quick-help {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+}
+
+.quick-help svg {
+  flex-shrink: 0;
+}
+
+.quick-help-text {
+  font-style: italic;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 600px) {
+  .help-grades {
+    grid-template-columns: 1fr;
+  }
+  
+  .scale-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .scale-value {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 19:15
+   编辑人: Trae AI
+   ======================================== */

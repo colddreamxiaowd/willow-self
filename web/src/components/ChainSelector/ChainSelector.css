@@ -1,0 +1,498 @@
+.chain-selector {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 520px;
+  width: 100%;
+  color: #fff;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.selector-header h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.selector-intro {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.selector-intro p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.policy-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: rgba(78, 205, 196, 0.1);
+  border-radius: 8px;
+}
+
+.policy-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.policy-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4ecdc4;
+}
+
+.chains-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.chain-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chain-card:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.chain-card.selected {
+  border-color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.chain-card.elite.selected {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.chain-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chain-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chain-icon {
+  font-size: 20px;
+}
+
+.chain-header h5 {
+  margin: 0;
+  font-size: 16px;
+  flex: 1;
+}
+
+.chain-status {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  background: rgba(var(--status-color), 0.2);
+  color: var(--status-color);
+}
+
+.chain-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.chain-usage {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chain-usage p {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.chain-usage ul {
+  margin: 0 0 8px 0;
+  padding-left: 16px;
+}
+
+.chain-usage li {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+.chain-warning {
+  color: #ffa500 !important;
+  font-size: 12px !important;
+}
+
+.chain-hint {
+  color: #4ecdc4 !important;
+  font-size: 12px !important;
+}
+
+.chain-error {
+  color: #ff6b6b !important;
+  font-size: 12px !important;
+}
+
+.no-normal-chains {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+
+.no-normal-chains p {
+  margin: 0 0 4px 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.no-normal-chains .hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.selector-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.confirm-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: #fff;
+}
+
+.confirm-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+
+.confirm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.selector-tips {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.selector-tips h5 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.selector-tips ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.selector-tips li {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   储君继承触发器
+   ======================================== */
+.inheritance-trigger {
+  background: linear-gradient(135deg, #2d1f3d 0%, #1a1a2e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  color: #fff;
+}
+
+.collapse-warning {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.warning-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.collapse-warning h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #ff6b6b;
+}
+
+.collapse-warning p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.inheritance-candidate {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.candidate-icon {
+  font-size: 24px;
+}
+
+.candidate-header h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #ffd700;
+}
+
+.candidate-description {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.candidate-info {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.info-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4ecdc4;
+}
+
+.inheritance-implication {
+  padding: 12px 16px;
+  background: rgba(78, 205, 196, 0.1);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.inheritance-implication h5 {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #4ecdc4;
+}
+
+.inheritance-implication ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.inheritance-implication li {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
+}
+
+.inheritance-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inheritance-actions .primary-btn {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inheritance-actions .primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.skip-btn {
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skip-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.no-candidate {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.empty-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.no-candidate p {
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.inheritance-history {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.inheritance-history h5 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.inheritance-history p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .chain-selector,
+  .inheritance-trigger {
+    padding: 16px;
+  }
+  
+  .candidate-info {
+    flex-direction: column;
+  }
+}
+
+// 最后更新时间: 2026-02-24 11:55
+// 编辑人: Trae AI

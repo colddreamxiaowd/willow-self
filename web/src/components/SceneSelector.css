@@ -1,0 +1,254 @@
+/* SceneSelector.css - 场景快速选择组件样式 */
+/* 设计理念：温暖、亲切、一眼就能找到自己 */
+
+/* ========================================
+   主容器
+   ======================================== */
+.scene-selector {
+  padding: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   头部
+   ======================================== */
+.selector-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.selector-header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.5rem;
+}
+
+.selector-header p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* ========================================
+   场景网格
+   ======================================== */
+.scenes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* ========================================
+   场景卡片
+   ======================================== */
+.scene-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.scene-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--scene-color, #00ff88);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.scene-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--scene-color, #00ff88);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.scene-card:hover::before {
+  opacity: 1;
+}
+
+.scene-card:active {
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   场景表情
+   ======================================== */
+.scene-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.scene-card:hover .scene-emoji {
+  transform: scale(1.1);
+}
+
+/* ========================================
+   场景信息
+   ======================================== */
+.scene-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.scene-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.25rem;
+}
+
+.scene-desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ========================================
+   箭头
+   ======================================== */
+.scene-arrow {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.scene-card:hover .scene-arrow {
+  color: var(--scene-color, #00ff88);
+  transform: translateX(4px);
+}
+
+/* ========================================
+   底部
+   ======================================== */
+.selector-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.selector-footer p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 0.75rem;
+}
+
+.custom-btn {
+  font-family: 'Rajdhani', sans-serif;
+  background: transparent;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: rgba(0, 255, 136, 0.4);
+  color: var(--cyber-green, #00ff88);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 500px) {
+  .scene-selector {
+    padding: 1rem;
+  }
+  
+  .scenes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .scene-card {
+    padding: 0.875rem 1rem;
+  }
+  
+  .scene-emoji {
+    width: 44px;
+    height: 44px;
+    font-size: 1.75rem;
+  }
+  
+  .scene-name {
+    font-size: 1rem;
+  }
+}
+
+/* ========================================
+   动画入场效果
+   ======================================== */
+@keyframes sceneFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scene-card {
+  animation: sceneFadeIn 0.4s ease forwards;
+}
+
+.scene-card:nth-child(1) { animation-delay: 0.05s; }
+.scene-card:nth-child(2) { animation-delay: 0.1s; }
+.scene-card:nth-child(3) { animation-delay: 0.15s; }
+.scene-card:nth-child(4) { animation-delay: 0.2s; }
+.scene-card:nth-child(5) { animation-delay: 0.25s; }
+.scene-card:nth-child(6) { animation-delay: 0.3s; }
+.scene-card:nth-child(7) { animation-delay: 0.35s; }
+.scene-card:nth-child(8) { animation-delay: 0.4s; }
+
+/* ========================================
+   减少动画偏好
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .scene-card,
+  .scene-emoji,
+  .scene-arrow {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ========================================
+   最后更新时间: 2026-02-21 18:20
+   编辑人: Trae AI
+   ======================================== */

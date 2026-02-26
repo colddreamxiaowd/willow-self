@@ -1,0 +1,302 @@
+.diary-tab {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.diary-date-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.diary-date-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #5a4a3a;
+  font-weight: 500;
+}
+
+.diary-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  font-size: 1.2rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5a4a3a;
+}
+
+.edit-btn {
+  margin-left: auto;
+  padding: 4px 12px;
+  border: none;
+  background: #f5efe8;
+  color: #8b7355;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  background: #ebe3d8;
+}
+
+.mood-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border: 2px solid #e8ddd4;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 70px;
+}
+
+.mood-btn:hover {
+  border-color: var(--mood-color);
+  background: color-mix(in srgb, var(--mood-color) 10%, white);
+}
+
+.mood-btn.selected {
+  border-color: var(--mood-color);
+  background: color-mix(in srgb, var(--mood-color) 15%, white);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--mood-color) 30%, transparent);
+}
+
+.mood-btn span {
+  font-size: 0.85rem;
+  color: #6b5a4a;
+}
+
+.mood-btn.selected span {
+  color: var(--mood-color);
+  font-weight: 600;
+}
+
+.weather-selector {
+  display: flex;
+  gap: 12px;
+}
+
+.weather-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 2px solid #e8ddd4;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.weather-btn:hover {
+  border-color: var(--weather-color);
+  background: color-mix(in srgb, var(--weather-color) 10%, white);
+}
+
+.weather-btn.selected {
+  border-color: var(--weather-color);
+  background: color-mix(in srgb, var(--weather-color) 15%, white);
+}
+
+.weather-btn span {
+  font-size: 0.9rem;
+  color: #6b5a4a;
+}
+
+.weather-btn.selected span {
+  color: var(--weather-color);
+  font-weight: 600;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.images-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.image-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.image-item:hover .remove-image-btn {
+  opacity: 1;
+}
+
+.upload-image-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border: 2px dashed #d4c4b0;
+  background: #faf6f2;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #8b7355;
+}
+
+.upload-image-btn:hover {
+  border-color: #8b7355;
+  background: #f5efe8;
+}
+
+.reflection-section {
+  min-height: 200px;
+}
+
+.reflection-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reflection-editor textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e8ddd4;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 150px;
+  font-family: inherit;
+  color: #5a4a3a;
+}
+
+.reflection-editor textarea:focus {
+  outline: none;
+  border-color: #8b7355;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  padding: 10px 24px;
+  border: none;
+  background: linear-gradient(135deg, #8b7355 0%, #a0826d 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+}
+
+.cancel-btn {
+  padding: 10px 24px;
+  border: 2px solid #e8ddd4;
+  background: white;
+  color: #6b5a4a;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #f5efe8;
+}
+
+.reflection-display {
+  padding: 16px;
+  background: #faf6f2;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 100px;
+}
+
+.reflection-display:hover {
+  background: #f5efe8;
+}
+
+.reflection-display p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5a4a3a;
+  white-space: pre-wrap;
+}
+
+.edit-hint {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #a09080;
+  text-align: right;
+}
